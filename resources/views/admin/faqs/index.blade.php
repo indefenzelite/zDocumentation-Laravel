@@ -60,7 +60,27 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">                                         
+                                    <div class="col-md-6">   
+                                        <div class="form-group ">
+                                            <div class="form-group {{ $errors->has('sub_category_id') ? 'has-error' : ''}}">
+                                                <label for="sub_category_id">{{ __('Sub Category')}} </label>
+                                                <a href="javascript:void(0);" title="@lang('admin/tooltip.add_faq_category')"><i class="ik ik-help-circle text-muted ml-1"></i></a>
+                                                <select name="sub_category_id" id="sub_category_id" class="form-control select2">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">   
+                                        <div class="form-group ">
+                                            <div class="form-group {{ $errors->has('sub_sub_category_id') ? 'has-error' : ''}}">
+                                                <label for="sub_sub_category_id">{{ __('Sub Sub Category')}} </label>
+                                                <a href="javascript:void(0);" title="@lang('admin/tooltip.add_faq_category')"><i class="ik ik-help-circle text-muted ml-1"></i></a>
+                                                <select name="sub_sub_category_id" id="sub_sub_category_id" class="form-control select2">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">                                         
                                         <div class="form-group">
                                             <label for="title" class="control-label">Question <span class="text-danger">*</span></label>
                                             <a href="javascript:void(0);" title="@lang('admin/tooltip.add_faq_question')"><i class="ik ik-help-circle text-muted ml-1"></i></a>
@@ -76,9 +96,7 @@
                                                 <div id="txt_area">
                                                     
                                                 </div>
-                                                    {{-- <textarea  class="form-control" name="value" placeholder="Value"></textarea> --}}
                                             </div>
-                                            {{-- <textarea class="form-control ck-editor" rows="5" name="description" type="textarea" id="name" placeholder="Enter remark here..." value="{{old('description')}}"></textarea> --}}
                                         </div>
                                     </div>    
                                           
@@ -227,11 +245,37 @@
                 return false;
             }
             data.append('description',description);
-            var response = postData(method,route,'json',data,null,null);
-            var redirectUrl = "{{url('admin/faqs')}}";
+            let response = postData(method,route,'json',data,null,null);
+            let redirectUrl = "{{url('admin/faqs')}}";
             if(typeof(response) != "undefined" && response !== null && response.status == "success"){
                 window.location.href = redirectUrl;
             }
         })
+        $(document).on('change','#category_id',function(){
+            let category_id = $(this).val();
+            let route = "{{route('admin.faqs.get.sub-categories')}}";
+            let method = 'GET';
+            let data = {category_id:category_id};
+            let response = getData(method,route,'json',data,'subCategoryCallback',null,0); 
+        })
+        function subCategoryCallback(response){
+            if(typeof(response) != "undefined" && response !== null && response.status == "success"){
+                $('#sub_category_id').html(response.html).change();
+            }
+        }
+
+        $(document).on('change','#sub_category_id',function(){
+            let category_id = $(this).val();
+            let type = "SubSubCategory";
+            let route = "{{route('admin.faqs.get.sub-categories')}}";
+            let method = 'GET';
+            let data = {category_id:sub_category_id,type:type};
+            let response = getData(method,route,'json',data,'subSubCategoryCallback',null,0); 
+        })
+        function subSubCategoryCallback(response){
+            if(typeof(response) != "undefined" && response !== null && response.status == "success"){
+                $('#sub_sub_category_id').html(response.html).change();
+            }
+        }
     </script>
     @endpush

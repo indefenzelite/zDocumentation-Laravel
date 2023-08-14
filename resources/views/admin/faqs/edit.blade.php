@@ -59,8 +59,18 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
+                                    <div class="form-group {{ $errors->has('sub_category_id') ? 'has-error' : '' }}">
+                                        <label for="sub_category_id">{{ __('Sub Category') }} <span class="text-danger">*</span>
+                                        </label>
+                                        <a href="javascript:void(0);" title="@lang('admin/tooltip.edit_faq_category')"><i
+                                                class="ik ik-help-circle text-muted ml-1"></i></a>
+                                        <select required name="sub_category_id" id="sub_category_id" class="form-control select2">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
                                     <div class="form-group ">
-                                        <label for="title" class="control-label">Title<span
+                                        <label for="title" class="control-label">Question<span
                                                 class="text-danger">*</span></label>
                                         <a href="javascript:void(0);" title="@lang('admin/tooltip.edit_faq_title')"><i
                                                 class="ik ik-help-circle text-muted ml-1"></i></a>
@@ -150,7 +160,25 @@
                 if (typeof(response) != "undefined" && response !== null && response.status == "success") {
                     window.location.href = redirectUrl;
                 }
+            });
+            $(document).on('change','#category_id',function(){
+                let category_id = $(this).val();
+                let route = "{{route('admin.faqs.get.sub-categories')}}";
+                let method = 'GET';
+                let data = {category_id:category_id};
+                let response = getData(method,route,'json',data,'subCategoryCallback',null,0); 
             })
+            function subCategoryCallback(response){
+                if(typeof(response) != "undefined" && response !== null && response.status == "success"){
+                    $('#sub_category_id').html(response.html);
+                }
+            }
+            var category_id = "{{$faq->category_id}}";
+            var sub_category_id = "{{$faq->sub_category_id}}";
+            $('#category_id').val(category_id).change();
+            setTimeout(() => {
+                $('#sub_category_id').val(sub_category_id).change();
+            }, 500);
         </script>
         {{-- END AJAX FORM INIT --}}
     @endpush

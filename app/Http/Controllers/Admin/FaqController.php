@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FaqRequest;
 use App\Models\Faq;
 use App\Models\Category;
+use App\Models\CategoryType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -66,7 +67,7 @@ class FaqController extends Controller
     public function create()
     {
         try {
-            $categories = getCategoriesByCode('FaqCategories');
+           $categories = getCategoriesByCode('FaqCategories');
             $label = Str::singular($this->label);
             return view('admin.faqs.create', compact('categories', 'label'));
         } catch (Exception $e) {
@@ -248,6 +249,30 @@ class FaqController extends Controller
 
                 ]
             );
+        }
+    }
+    public function getSubCategory(Request $request){
+        try {
+            $category = Category::where('id',$request->category_id)->first();
+            $categories = [];
+            if(isset($request->type) && $request->type == 'SubSubCategory'){
+                if ($category) {
+                    $categories = $category->childrenCategories;
+                }
+            }else{
+                if ($category) {
+                   $categories = $category->categories;
+                }
+            }
+            $html = null;
+            if (count($categories) > 0) {
+                foreach ($categories as $key => $category) {
+                    $html .= "<option value='".$category->id."'>".$category->name."</option>";
+                }
+            }
+            return response()->json(['status'=>'success','html'=>$html]);
+        } catch (Exception $e) {
+            return back()->with('error', 'There was an error: ' . $e->getMessage());
         }
     }
 }

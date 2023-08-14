@@ -18,6 +18,7 @@ use App\User;
 use App\Models\Slider;
 use App\Models\SliderType;
 use App\Models\NewsLetter;
+use App\Models\Faq;
 use App\Http\Requests\NewsLetterRequest;
 use App\Models\WebsitePage;
 use App\Models\ParagraphContent;
@@ -25,7 +26,7 @@ use App\Models\ParagraphContent;
 class HomeController extends Controller
 {
         
-    public function index()
+    public function index(Request $request)
     {
         $metas = getSeoData('home');
         $app_settings = getSetting(['app_core']);
