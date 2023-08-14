@@ -383,6 +383,8 @@ Route::group(
         Route::any('/print','print')->name('print');
         Route::get('/destroy/{faq}', 'destroy')->name('destroy')->middleware('permission:delete_faq');
         Route::post('bulk-action', 'bulkAction')->name('bulk-action');
+        Route::get('/get/sub-categories', 'getSubCategory')->name('get.sub-categories');
+        Route::get('/get/sub-sub-categories', 'getSubSubCategory')->name('get.sub-sub-categories');
     });
     Route::group(['prefix' => 'locations', 'as' => 'locations.', 'controller' => LocationController::class],function () {
         Route::get('/country','country')->name('country')->middleware('permission:view_locations');

@@ -57,11 +57,9 @@
                         <div class="d-flex justicy-content-right">
                             @if (auth()->user()->isAbleTo('add_order'))
                                 <a href="{{ route('admin.orders.create') }}"
-                                    class="btn btn-icon btn-sm btn-outline-primary mr-2" title="Add New Orders"><i
-                                        class="fa fa-plus mt-2" aria-hidden="true"></i></a>
+                                    class="btn btn-icon btn-sm btn-outline-primary mr-2" title="Add New Orders"><i class="fa fa-plus mt-2" aria-hidden="true"></i></a>
                             @endif
-                            <button type="button" class="off-canvas btn btn-outline-secondary btn-icon"><i
-                                    class="fa fa-filter"></i></button>
+                            <button type="button" class="off-canvas btn btn-outline-secondary btn-icon"><i class="fa fa-filter"></i></button>
                             <form action="{{ route('admin.orders.bulk-action') }}" method="POST" id="bulkAction"
                                 class="d-flex">
                                 @csrf

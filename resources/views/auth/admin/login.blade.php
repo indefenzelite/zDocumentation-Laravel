@@ -48,8 +48,8 @@
 @section('content')
 <section class="bg-home-75vh">
     <div class="container">
-        <div class="row">
-            <div class="col-12">
+        <div class="row ">
+            <div class="col-4 mx-auto mt-4 my-auto">
                 @if(getSetting('authentication_mode') == 1)
                     <div class="p-3 bg-white rounded shadow form-signin">
                         <form method="POST" action="{{ route('login',$role) }}">

@@ -12,14 +12,14 @@
              
                 <button type="button" id="navbar-fullscreen" class="nav-link"><i class="ik ik-maximize"></i></button>
                 <a href="{{route('index')}}" type="button" id="" class="nav-link bg-gray ml-1"><i class="ik ik-home"></i></a>
-                @if(Route::is('admin.dashboard.index'))
+                {{-- @if(Route::is('admin.dashboard.index'))
                     <button type="button" class="nav-link bg-gray ml-1" data-toggle="modal" data-target="#addBrodcast">
                         <i class="ik ik ik-radio" title="Broadcast"></i>
                     </button>
-                @endif
+                @endif --}}
             </div>
                     <div class="top-menu d-flex align-items-center">
-                    <div class="dropdown">
+                    {{-- <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="notiDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ik ik-bell"></i><span class="badge bg-danger" style="line-height: 13px;">{{ $notifications->count() > 4 ? '4+' : $notifications->count() }}</span></a>
                         <div class="dropdown-menu dropdown-menu-right notification-dropdown" aria-labelledby="notiDropdown">
                             <h4 class="header">Notifications</h4>
@@ -43,7 +43,7 @@
                             <div class="footer"><a href="{{ route('admin.notifications.index') }}">See all activity</a>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="dropdown">
                     
                     <a class="dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

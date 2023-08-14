@@ -27,6 +27,11 @@
                 box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
                 border: 2px solid #1373d9 !important;
             }
+            .dropdown-btn{
+                position: absolute;
+                right: 0;
+                top: 7px;
+            }
         </style>
         <div class="row no-gutters custom-bulk-section">
             @foreach ($categoryTypes as $categoryType)
@@ -36,7 +41,7 @@
                         <input type="checkbox" class="form-check-input toggle-selected" name="id" id="card-{{ $categoryType->id }}" value="{{ $categoryType->id }}" onclick="countSelected($(this))">
                     </div>
                     <div class="dropdown" style="height:2px;z-index: 99;">
-                        <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <button class="text-muted btn btn-link text-decoration-none dropdown-toggle dropdown-btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="ik ik-more-vertical"></i>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -49,13 +54,14 @@
                             @endif
                         </div>
                     </div>
-                    <div class="card custom-card border mb-0 text-center">
-                        <div class="card-title mt-4 mb-0">
-                            <h6 class="mb-0">{{ ucwords(str_replace('_', ' ', $categoryType->name)) ?? '-' }}</h6>
+                    <a href="{{ route('admin.categories.index', $categoryType->id) }}">
+                        <div class="card custom-card border mb-0 text-center">
+                            <div class="card-title mt-1 mb-0">
+                                <h5 class="fw-800">{{$categoryType->categories->count()}}</h5>
+                                <h6 class="mb-0">{{ ucwords(str_replace('_', ' ', $categoryType->name)) ?? '-' }}</h6>
+                            </div>
                         </div>
-                        <small>Code</small>
-                        {{ $categoryType->code }}
-                    </div>
+                    </a>
                 </label>
             </div>
             @endforeach

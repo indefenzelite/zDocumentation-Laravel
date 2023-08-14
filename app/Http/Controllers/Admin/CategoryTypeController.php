@@ -29,7 +29,7 @@ class CategoryTypeController extends Controller
     }
     public function index(Request $request)
     {
-        $length = 10;
+        $length = 12;
         if(request()->get('length')){
             $length = $request->get('length');
         }
@@ -48,7 +48,7 @@ class CategoryTypeController extends Controller
         if($request->get('trash') == 1){
             $categoryTypes->onlyTrashed();
         }
-        $categoryTypes= $categoryTypes->paginate($length);
+        $categoryTypes= $categoryTypes->latest()->paginate($length);
 
         if ($request->ajax()) {
             return view('admin.category-types.load', ['categoryTypes' => $categoryTypes])->render();  
@@ -144,7 +144,7 @@ class CategoryTypeController extends Controller
             $categoryType->allowed_level=$request->allowed_level;
 
             // $categoryType->code=$request->code;
-            $categoryType->permission_id=$request->permission_id;
+            // $categoryType->permission_id=$request->permission_id;
 
             $categoryType->remark=$request->remark;
             $categoryType->save();

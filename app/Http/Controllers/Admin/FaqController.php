@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FaqRequest;
 use App\Models\Faq;
 use App\Models\Category;
+use App\Models\CategoryType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -49,6 +50,12 @@ class FaqController extends Controller
         if ($request->get('desc')) {
             $faqs->orderBy($request->get('desc'), 'desc');
         }
+        if ($request->has('created_by') && $request->get('created_by') != null) {
+            $faqs->where('created_by',$request->created_by);
+        }
+        if ($request->has('category_id') && $request->get('category_id') != null) {
+            $faqs->where('category_id',$request->category_id);
+        }
         $faqs= $faqs->latest()->paginate($length);
         if ($request->ajax()) {
             return view('admin.faqs.load', ['faqs' => $faqs])->render();
@@ -66,7 +73,7 @@ class FaqController extends Controller
     public function create()
     {
         try {
-            $categories = getCategoriesByCode('FaqCategories');
+           $categories = getCategoriesByCode('FaqCategories');
             $label = Str::singular($this->label);
             return view('admin.faqs.create', compact('categories', 'label'));
         } catch (Exception $e) {
@@ -248,6 +255,44 @@ class FaqController extends Controller
 
                 ]
             );
+        }
+    }
+    public function getSubCategory(Request $request){
+        try {
+            $html = null;
+            $categories = [];
+            $category = Category::where('id',$request->category_id)->first();
+            if ($category) {
+               $categories = $category->categories;
+            }
+            if (count($categories) > 0) {
+                $html .= "<option value='' readonly>Select Sub Category</option>";
+                foreach ($categories as $key => $category) {
+                    $html .= "<option value='".$category->id."'>".$category->name."</option>";
+                }
+            }
+            return response()->json(['status'=>'success','html'=>$html]);
+        } catch (Exception $e) {
+            return back()->with('error', 'There was an error: ' . $e->getMessage());
+        }
+    }
+    public function getSubSubCategory(Request $request){
+        try {
+            $html = null;
+            $categories = [];
+            $category = Category::where('id',$request->sub_category_id)->first();
+            if ($category) {
+               $categories = $category->categories;
+            }
+            if (count($categories) > 0) {
+                $html .= "<option value='' readonly>Select Sub Sub Category</option>";
+                foreach ($categories as $key => $category) {
+                    $html .= "<option value='".$category->id."'>".$category->name."</option>";
+                }
+            }
+            return response()->json(['status'=>'success','html'=>$html]);
+        } catch (Exception $e) {
+            return back()->with('error', 'There was an error: ' . $e->getMessage());
         }
     }
 }

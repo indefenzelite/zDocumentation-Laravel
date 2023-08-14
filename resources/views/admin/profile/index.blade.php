@@ -90,11 +90,11 @@
                         <li class="nav-item">
                             <a data-active="account" class="nav-link active-swicher @if(request()->has('active') && request()->get('active') == "account") active @endif" data-type="account" id="pills-timeline-tab" data-toggle="pill" href="#current-month" role="tab" aria-controls="pills-timeline" aria-selected="true">{{ __('Change Password')}}</a>
                         </li>
-                        @if(auth()->user()->isAbleTo('control_mfa_user'))
+                        {{-- @if(auth()->user()->isAbleTo('control_mfa_user'))
                             <li class="nav-item">
                                 <a data-active="security" class="nav-link active-swicher @if(request()->has('active') && request()->get('active') == "security") active @endif" data-type="security" id="pills-timeline-tab" data-toggle="pill" href="#security" role="tab" aria-controls="pills-timeline" aria-selected="true">{{ __('MFA')}}</a>
                             </li>
-                        @endif
+                        @endif --}}
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         <div class="tab-pane fade @if(request()->has('active') && request()->get('active') == "setting" || !request()->has('active')) show active  @endif" id="previous-month" role="tabpanel" aria-labelledby="pills-setting-tab">
