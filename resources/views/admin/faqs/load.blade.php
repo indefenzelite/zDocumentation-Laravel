@@ -21,7 +21,6 @@
                     <th class="text-center"># <div class="table-div"><i class="ik ik-arrow-up  asc" data-val="id"></i><i class="ik ik ik-arrow-down desc" data-val="id"></i></div></th>
                     <th>Question</th>
                     <th>Category
-                        <br><small>Sub Category</small>
                     </th>
                     <th>Status</th>
                     
@@ -47,8 +46,7 @@
                         </td>
                         <td class="text-center"> {{ $faq->getPrefix() }}</td>
                         <td>{{$faq->title }}</td>
-                        <td>{{ $faq->category->name ?? '' }}
-                            <br><small title="Sub Category">{{ $faq->subCategory->name ?? '' }}</small>
+                        <td>{{ $faq->category->name ?? '' }} > {{@$faq->subCategory->name}} > {{@$faq->subSubCategory->name}}
                         </td>
                         <td class="is_publish-{{$faq->id}}" data-status="{{ $faq->is_publish }}">
                             @if($faq->is_publish == 1)

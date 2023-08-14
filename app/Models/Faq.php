@@ -21,6 +21,10 @@ class Faq extends Model
     }
     public function subCategory()
     {
-        return $this->belongsTo(Category::class,'category_id', 'parent_id');
+        return $this->belongsTo(Category::class,'sub_category_id', 'id');
+    }
+    public function subSubCategory()
+    {
+        return $this->belongsTo(Category::class,'sub_sub_category_id', 'id');
     }
 }

@@ -45,8 +45,9 @@
                             
                             <div class="card-body">
                                 <input type="hidden" name="request_with" value="create">
+                                <input type="hidden" name="created_by" value="{{auth()->id()}}">
                                 <div class="row">
-                                    <div class="col-md-6">   
+                                    <div class="col-md-4">   
                                         <div class="form-group ">
                                             <div class="form-group {{ $errors->has('category_id') ? 'has-error' : ''}}">
                                                 <label for="category_id">{{ __('Category')}} <span class="text-danger">*</span> </label>
@@ -60,7 +61,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">   
+                                    <div class="col-md-4">   
                                         <div class="form-group ">
                                             <div class="form-group {{ $errors->has('sub_category_id') ? 'has-error' : ''}}">
                                                 <label for="sub_category_id">{{ __('Sub Category')}} </label>
@@ -70,7 +71,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">   
+                                    <div class="col-md-4">   
                                         <div class="form-group ">
                                             <div class="form-group {{ $errors->has('sub_sub_category_id') ? 'has-error' : ''}}">
                                                 <label for="sub_sub_category_id">{{ __('Sub Sub Category')}} </label>
@@ -89,7 +90,7 @@
                                     </div>
                                     <div class="col-md-12">                              
                                         <div class="form-group ">
-                                            <label for="description" class="control-label">Description<span class="text-danger">*</span></label>
+                                            <label for="description" class="control-label">Answer<span class="text-danger">*</span></label>
                                             <div id="content-holder">
                                                     
                                                 <div id="toolbar-container"></div>
@@ -117,37 +118,49 @@
                     <div class="card-header d-flex justify-content-between">
                         <h3>{{$label}}</h3>
                         <div class="d-flex">
-                        <a href="javascript:void(0);" id="addFaqs" class="btn btn-icon btn-sm btn-outline-primary mr-2" title="Add New Faq"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                        <form action="{{route('admin.faqs.bulk-action')}}" method="POST" id="bulkAction"> 
-                            @csrf
-                            <input type="hidden" name="ids" id="bulk_ids">
-                            <button style="background: transparent;border:none;" class="dropdown-toggle p-0 three-dots" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ik ik-more-vertical pl-1"></i></button>
-                            <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                                <button type="submit" 
-                                class="dropdown-item bulk-action text-danger fw-700"  
-                                data-value="" 
-                                data-message="You want to delete these items?" 
-                                data-action="delete" 
-                                data-callback="bulkDeleteCallback"> Bulk Delete
-                            </button>
+                            <form action="" method="get" class="TableForm d-flex">
+                                <div class="mr-2">
+                                    <select name="category_id" id="" class="form-control select2">
+                                        <option value="" readonly>Select Category</option>
+                                        @foreach (getCategoriesByCode('FaqCategories') as $category)
+                                        <option value="{{$category->id}}" @if($category->id == request()->get('category_id')) selected @endif>{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn btn-icon btn-sm btn-outline-warning mr-2" title="Filter"><i class="fa fa-filter" aria-hidden="true"></i></button>
+                                <a href="{{route('admin.faqs.index')}}" class="btn btn-icon btn-sm btn-outline-danger mr-2" title="Reset"><i class="fa fa-redo" aria-hidden="true"></i></a>
+                                <a href="javascript:void(0);" id="addFaqs" class="btn btn-icon btn-sm btn-outline-primary mr-2" title="Add New Faq"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                            </form>
+                            <form action="{{route('admin.faqs.bulk-action')}}" method="POST" id="bulkAction"> 
+                                @csrf
+                                <input type="hidden" name="ids" id="bulk_ids">
+                                <button style="background: transparent;border:none;" class="dropdown-toggle p-0 three-dots" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ik ik-more-vertical pl-1"></i></button>
+                                <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+                                    <button type="submit" 
+                                    class="dropdown-item bulk-action text-danger fw-700"  
+                                    data-value="" 
+                                    data-message="You want to delete these items?" 
+                                    data-action="delete" 
+                                    data-callback="bulkDeleteCallback"> Bulk Delete
+                                </button>
 
-                            <a href="javascript:void(0)" 
-                                class="dropdown-item bulk-action"      
-                                data-value="0" 
-                                data-status="Unpublish" 
-                                data-column="is_publish" 
-                                data-message="You want to mark Unpublish these items?" data-action="columnUpdate" data-callback="bulkColumnUpdateCallback">Mark as Unpublish
-                            </a>
+                                <a href="javascript:void(0)" 
+                                    class="dropdown-item bulk-action"      
+                                    data-value="0" 
+                                    data-status="Unpublish" 
+                                    data-column="is_publish" 
+                                    data-message="You want to mark Unpublish these items?" data-action="columnUpdate" data-callback="bulkColumnUpdateCallback">Mark as Unpublish
+                                </a>
 
-                            <a href="javascript:void(0)" 
-                                class="dropdown-item bulk-action"
-                                data-value="1" 
-                                data-status="Publish" 
-                                data-column="is_publish" 
-                                data-message="You want to mark Publish these items?" data-action="columnUpdate" data-callback="bulkColumnUpdateCallback">Mark as Publish
-                            </a>
-                            </ul>
-                        </form>
+                                <a href="javascript:void(0)" 
+                                    class="dropdown-item bulk-action"
+                                    data-value="1" 
+                                    data-status="Publish" 
+                                    data-column="is_publish" 
+                                    data-message="You want to mark Publish these items?" data-action="columnUpdate" data-callback="bulkColumnUpdateCallback">Mark as Publish
+                                </a>
+                                </ul>
+                            </form>
                         </div>
                     </div>
                     <form action="{{ route('admin.faqs.index') }}"  method="GET" id="TableForm">
@@ -260,22 +273,25 @@
         })
         function subCategoryCallback(response){
             if(typeof(response) != "undefined" && response !== null && response.status == "success"){
-                $('#sub_category_id').html(response.html).change();
+                $('#sub_category_id').html(response.html);
             }
+            $('#sub_category_id').change();
+        }
+        
+        $(document).on('change','#sub_category_id',function(){
+            let sub_category_id = $(this).val();
+            let route = "{{route('admin.faqs.get.sub-sub-categories')}}";
+            let method = 'GET';
+            let data = {sub_category_id:sub_category_id};
+            let res = getData(method,route,'json',data,'subSubCategoryCallback',null,0); 
+        })
+        function subSubCategoryCallback(res){
+            if(typeof(res) != "undefined" && res !== null && res.status == "success"){
+                $('#sub_sub_category_id').html(res.html);
+            }
+            $('#sub_sub_category_id').change();
         }
 
-        $(document).on('change','#sub_category_id',function(){
-            let category_id = $(this).val();
-            let type = "SubSubCategory";
-            let route = "{{route('admin.faqs.get.sub-categories')}}";
-            let method = 'GET';
-            let data = {category_id:sub_category_id,type:type};
-            let response = getData(method,route,'json',data,'subSubCategoryCallback',null,0); 
-        })
-        function subSubCategoryCallback(response){
-            if(typeof(response) != "undefined" && response !== null && response.status == "success"){
-                $('#sub_sub_category_id').html(response.html).change();
-            }
-        }
+
     </script>
     @endpush

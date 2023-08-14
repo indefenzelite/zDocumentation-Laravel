@@ -737,3 +737,8 @@ if (!function_exists('getNewAcquisitionForOrders')) {
         return $count;
     }
 }
+if (!function_exists('getFaqByCreatedBy')) {
+    function getFaqByCreatedBy($user_id) {
+        return $faqs = App\Models\Faq::where('created_by',$user_id)->count();
+    }
+}
