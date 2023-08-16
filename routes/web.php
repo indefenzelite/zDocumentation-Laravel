@@ -84,7 +84,10 @@ Route::get('page-error', [HomeController::class,'notFound'])->name('error.index'
 Route::post('/newsletter/store', [HomeController::class,'newsletterStore'])->name('newsletter.store');
 Route::get('/blogs', [BlogController::class,'index'])->name('blogs');
 Route::get('/blog/{slug}', [BlogController::class,'show'])->name('blog.show');
-Route::get('/faqs', [FaqController::class,'index'])->name('faqs');
+// Route::get('/faqs', [FaqController::class,'index'])->name('faqs');
+Route::get('/sub/categories/{id}', [HomeController::class,'subCategories'])->name('sub.categories');
+Route::get('/category/{c_id}/sub-category/{s_id}/sub_id/', [FaqController::class,'index'])->name('faqs.index');
+
 
 
 // Contact

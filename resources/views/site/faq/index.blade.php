@@ -1,83 +1,64 @@
 @extends('layouts.app')
-
-{{-- @section('meta_data')
-    @php
-		$meta_title =  ($faqs->page_meta_title) ? $faqs->page_meta_title : getSetting('app_name');		
-		$meta_description = ($faqs->page_meta_description) ? $faqs->page_meta_description : '';		
-		$meta_keywords = ($faqs->page_keywords) ? $faqs->page_keywords : getSetting('app_name');		
-		$meta_motto = (false) ? $faqs->page_keywords : getSetting('app_name');		
-	@endphp
-@endsection --}}
-
-@section('content')ˀ
-    <!--Shape End-->  
-   <!-- Start Faqs -->
-   <style>
-    .card-header {
-      border-bottom: none !important;
-    }    
-    .bg-linear-gradient-primary{
-        background: linear-gradient(#ffffff, #001683);
+<style>
+    .uk-position-fixed {
+        position: fixed !important;
     }
-  </style>
-  <section class="faq bg-linear-gradient-primary"style=" min-height: 92vh;" >
-    {{--  background-color: #f2f4fc;" min-height: 150vh; --}}
-    <div class="container">
-        {{-- @include('site.faqs.include.breadcrumb-area') --}}
-          @php
+
+</style>
+
+@section('content')
+<div class="uk-section-">
+    <div class="uk-container mt-5">
+        @php
             if(request()->get('category_id')){
               $faqs = App\Models\Faq::where('category_id',request()->get('category_id'))->get();
             }else {
               $faqs = App\Models\Faq::get();
             }
-          @endphp
-          <div class="row"style="padding-top: 141px;">
-            <div class="col-md-4">
-              <div class="card mt-2">
-                <div class="card-header">
-                  <h5>Categories</h5>
-                </div>
-                <div class="card-body">
-                  <ul>
-                    @foreach ($categories as $category)
-                      <li class="mb-2">
-                        <a href="{{route('faqs',['category_id'=>$category->id])}}"
-                          class="@if(request()->get('category_id') == $category->id) text-primary @else text-dark inactive  @endif mr-4">{{ucwords($category->name)}}
-                        </a>
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
-              </div>
-            </div><!--end row-->
-            <div class="col-md-8">
-                <div class="accordion mb-4" id="accordionExample">
-                  @forelse ($faqs as $key => $faq)
-                    <div class="accordion-item rounded shadow wow animate_animated animate_fadeInUp mt-2">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button border-0 bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{$key}}"
-                                aria-expanded="true" aria-controls="collapse-{{$key}}">
-                                {{$faq->title}}
-                            </button>
-                        </h2>
-                        <div id="collapse-{{$key}}" class="accordion-collapse border-0 collapse @if($loop->first) show @endif" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body text-muted">
-                               {!!$faq->description!!}
-                            </div>
+        @endphp
+        <div class="uk-grid-large" data-uk-grid>
+            <div class="sidebar-fixed-width uk-visible@m">
+                <div class="sidebar-docs uk-position-fixed uk-margin-top px-2" style="background: #fbfbfd;"
+                    id="side_duties">
+                    <div class="uk-container uk-container-small">
+                        <div class="text-muted mb-2">
+                            Table of content
+                        </div>
+                        <div class="uk-position-relative side_duties" id="side_duties">
+                          @foreach ($categories as $category)
+                          <div style="text-align:left;margin:0;font-weight:500" class="@if($category->id == $c_id) category-active @endif">{{$category->name}}</div>
+                            <ul class="uk-nav uk-nav-default doc-nav side_menu" style="text-align:left;">
+                                <li class="duty-active checkRequest1 uk-active"><a href="javascript:void(0)" data-id="1"
+                                        onclick="loadDutiesData(event, 1,1,1,1)" class="@if($category->id == request()->get('c_id'))  active  @endif">{{$category->name}}</a></li>
+                                
+                                <li class=" duty-active checkRequest2"><a href="javascript:void(0)" data-id="2"
+                                        onclick="loadDutiesData(event, 1,1,1,2)">S2R1</a></li>
+                                <li class=" duty-active checkRequest3"><a href="javascript:void(0)" data-id="3"
+                                        onclick="loadDutiesData(event, 1,1,1,3)">S2R1DA1D1</a></li>
+                            </ul>
+                          @endforeach
                         </div>
                     </div>
-                  @empty 
-                    <div class="m-5 p-5 text-center">
-                      No FAQs Yet!
-                    </div>
-                  @endforelse
-                </div><!--end col-->
-            </div><!--end row-->
-        </div>
-      </div><!-- /.container -->
-  </section><!-- /.FAQ -->
-<!-- End Faqs -->
 
-    
+                </div>
+            </div>
+
+            <div class="uk-width-1-1 uk-width-expand@m align-items-end" id="ajax-container" style="min-height: 450px;">
+                @include('site.faq.load')
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="offcanvas-docs" data-uk-offcanvas="overlay: true">
+    <div class="uk-offcanvas-bar">
+        <button class="uk-offcanvas-close" type="button" data-uk-close></button>
+
+        <div class="uk-position-relative side_duties">
+
+        </div>
+
+    </div>
+</div>
+
 @endsection

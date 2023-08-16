@@ -14,7 +14,7 @@ class FaqController extends Controller
     {
         $this->label = 'FAQS';
     }
-    public function index(Request $request)
+    public function index(Request $request,$c_id,$s_id)
     {
         $length = 10;
         if (request()->get('length')) {
@@ -40,7 +40,8 @@ class FaqController extends Controller
         //     return view('admin.faqs.load', ['faqs' => $faqs])->render();
         // }
         $categories = getCategoriesByCode('FaqCategories');
+
         $label = $this->label;
-        return view('site.faq.index', compact('faqs', 'label', 'categories'));
+        return view('site.faq.index', compact('faqs', 'label', 'categories','c_id','s_id'));
     }
 }

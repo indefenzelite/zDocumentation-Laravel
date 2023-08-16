@@ -47,4 +47,12 @@ class Category extends Model
     {
         return $this->belongsTo(Category::class, 'parent_id');
     }
+    public function latestCategory()
+    {
+        return $this->hasOne(Category::class,'parent_id','id')->latest();
+    }
+    public function latestChildrenCategory()
+    {
+        return $this->hasOne(Category::class,'parent_id','id')->latest();
+    }
 }
