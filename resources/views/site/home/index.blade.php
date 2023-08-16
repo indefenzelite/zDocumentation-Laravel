@@ -41,7 +41,7 @@
                             <path fill="none" stroke="#000" stroke-width="1.1" d="M14,14 L18,18 L14,14 Z"></path>
                         </svg></span>
                     <input id="search-hero" class="uk-search-input uk-box-shadow-large" type="search"
-                        placeholder="Search for Standards" autocomplete="off" value="" data-minchars="1"
+                        placeholder="Search for Categories" autocomplete="off" value="" data-minchars="1"
                         data-maxitems="30">
                 </form>
             </div>
@@ -57,7 +57,8 @@
                 <a href="{{ route('sub.categories',$category->id) }}">
                     <div class="uk-card uk-card-default uk-box-shadow-medium uk-card-hover uk-card-body uk-inline border-radius-large border-xlight"
                         style="width:100%;height:100%;">
-                        <img  src="storage/uploads/standards/jUI9ZO6aLwJnm0KfJ6eDvAcBEE3YfmooiVtnLQGReNXQuV7Plh6Pf3tbXiAd5zhK.jpg"
+                    
+                        <img  src="{{asset('storage/backend/category-icon/'.$category->icon)}}"
                             alt="Standard Image" srcset="" class="w-25" style="border-radius:80px">
                         <h3 class="uk-card-title uk-margin">{{$category->name}}</h3>
                         {{-- <p>{{$category->}}</p> --}}

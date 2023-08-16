@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Faq;
+use App\Models\Category;
 
 class FaqController extends Controller
 {
@@ -14,34 +15,29 @@ class FaqController extends Controller
     {
         $this->label = 'FAQS';
     }
-    public function index(Request $request,$c_id,$s_id)
+    public function index(Request $request,$c_id,$s_id,$id = null)
     {
         $length = 10;
         if (request()->get('length')) {
             $length = $request->get('length');
         }
-        $faqs = Faq::query();
-        if (request()->has('search') && request()->get('search')) {
-            $faqs->where('title', 'like', '%'.request()->get('search').'%')
-                ->orWhereHas(
-                    'category', function ($q) {
-                        $q->where('name', 'like', '%'.request()->get('search').'%');
-                    }
-                );
+
+        if($id == null){
+            $faq = Faq::where('category_id',$c_id)->where('sub_category_id',$s_id)->latest()->first();
+        }else{
+            $faq = Faq::where('id',$id)->where('sub_category_id',$s_id)->where('category_id',$c_id)->latest()->first();
         }
-        if($request->get('asc')) {
-            $faqs->orderBy($request->get('asc'), 'asc');
+        if ($request->ajax()) {
+            $data = view('site.faq.load', ['faq' => $faq])->render();
+            return response([
+                'data' => $data,
+            ]);
         }
-        if($request->get('desc')) {
-            $faqs->orderBy($request->get('desc'), 'desc');
-        }
-        $faqs= $faqs->latest()->paginate($length);
-        // if ($request->ajax()) {
-        //     return view('admin.faqs.load', ['faqs' => $faqs])->render();
-        // }
-        $categories = getCategoriesByCode('FaqCategories');
 
         $label = $this->label;
-        return view('site.faq.index', compact('faqs', 'label', 'categories','c_id','s_id'));
+        $sub_category = Category::where('id',$s_id)->first();
+        $sub_sub_categories = $sub_category->childrenCategories ?? [];
+        
+        return view('site.faq.index', compact('label','c_id','s_id','sub_sub_categories','id'));
     }
 }

@@ -51,18 +51,18 @@
             <div class="uk-card-header pt-3 pl-2">
                 <div class="uk-grid-small uk-flex-middle uk-grid uk-grid-stack" data-uk-grid="">
                     <div class="uk-width-expand uk-first-column">
-                                <a href="{{ route('faqs.index',[$category_id,$sub_category->id,'id' => @$sub_category->latestCategory->id]) }}">
+                                <a href="{{ route('faqs.index',[$category_id,$sub_category->id]) }}">
                                     <h3 class="uk-card-title uk-margin-remove-bottom">{{$sub_category->name}}</h3>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="w-100 d-flex justify-content-end mt-3">
+                    {{-- <div class="w-100 d-flex justify-content-end mt-3">
                         <a href="#" class="text-end">
                             <img src="{{$sub_category->icon}}"
                                 alt="Image" srcset="" class="" style="padding-right: 5px;">
                         </a>
-                    </div>
+                    </div> --}}
 
                 </div>
               @foreach ($sub_category->categories as $item)
