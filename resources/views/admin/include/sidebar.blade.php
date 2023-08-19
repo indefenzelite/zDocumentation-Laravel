@@ -69,8 +69,11 @@
                             @if(getSetting('faq_activation') == 1)
                                 @if(auth()->user()->isAbleTo('view_faqs'))
                                     <a href="{{ route('admin.faqs.index') }}" class="menu-item {{ activeClassIfRoutes(['admin.faqs.index','admin.faqs.create','admin.faqs.edit',], 'active')  }}">{{ __('Questions')}}</a>
-                                @endif
+                                    @endif 
                             @endif
+                            @if(auth()->user()->isAbleTo('view_votes'))
+                            <a href="{{ route('admin.votes.index') }}" class="menu-item {{ activeClassIfRoutes(['admin.votes.index','admin.votes.create','admin.votes.edit',], 'active')  }}">{{ __('Vote')}}</a>
+                             @endif
                             @if(getSetting('article_activation') == 1)
                                 @if(auth()->user()->isAbleTo('view_blogs'))
                                 <a href="{{route('admin.blogs.index')}}" class="menu-item {{ activeClassIfRoutes(['admin.blogs.index','admin.blogs.create','admin.blogs.edit','admin.blogs.show'], 'active')  }}">{{ __('Blogs')}}</a>
@@ -116,6 +119,7 @@
                                     <a href="{{route('admin.website-pages.index')}}" class="menu-item a-item {{ activeClassIfRoutes(['admin.website-pages.index','admin.website-pages.create','admin.website-pages.edit'], 'active')  }}">{{ __('Pages')}}</a>
                                 @endif
                             @endif
+                            
                         </div>
                         <div class="nav-item {{ activeClassIfRoutes(['admin.users.index','admin.users.show', 'admin.users.create', 'admin.user_log.index','admin.roles.index','admin.permissions.index','admin.roles.edit','admin.users.edit'], 'active open') }} has-sub">
                             <a href="#"><i class="ik ik-users"></i><span>{{ __('Administrator')}}</span></a>

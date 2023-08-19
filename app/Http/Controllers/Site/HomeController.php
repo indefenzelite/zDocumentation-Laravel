@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Models\Slider;
+use App\Models\Category;
 use App\Models\SliderType;
 use App\Models\NewsLetter;
 use App\Models\Faq;
@@ -29,9 +30,10 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $metas = getSeoData('home');
+        $categories = getCategoriesByCode('FaqCategories');
         $app_settings = getSetting(['app_core']);
         $contents = getParagraphContent(['home_title','home_description']);
-        return view('site.home.index', compact('metas', 'contents', 'app_settings'));
+        return view('site.home.index', compact('metas', 'contents', 'app_settings','categories'));
     }
     
     public function notFound()
@@ -137,4 +139,13 @@ class HomeController extends Controller
             return redirect('/');
         }
     }
+
+    public function subCategories(Request $request){
+        
+         $category = Category::where('id',$request->id)->first();
+         $sub_categories = $category->childrenCategories;
+         $category_id = $request->id;
+        return  view('site.category.index',compact('sub_categories','category_id'));
+    }
+
 }
