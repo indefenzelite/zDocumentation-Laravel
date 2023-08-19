@@ -31,6 +31,9 @@ class HomeController extends Controller
     {
         $metas = getSeoData('home');
         $categories = getCategoriesByCode('FaqCategories');
+        if (request()->has('search') && request()->get('search')) {
+            $categories->where('name', 'like', '%'.request()->get('search').'%');
+        }
         $app_settings = getSetting(['app_core']);
         $contents = getParagraphContent(['home_title','home_description']);
         return view('site.home.index', compact('metas', 'contents', 'app_settings','categories'));
@@ -148,4 +151,15 @@ class HomeController extends Controller
         return  view('site.category.index',compact('sub_categories','category_id'));
     }
 
+    public function loadOnScroll(Request $request)
+    {
+       $standard = Standard::when($request->has('search'),function($q) use ($request){
+   
+        $q->where('name','like','%'.$request->get('search').'%');
+       })->paginated()->get();
+        if($request->ajax()){
+        
+            return response()->json(['post'=>$standard]);
+        } 
+    }
 }

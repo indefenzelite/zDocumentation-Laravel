@@ -9,7 +9,7 @@
     margin-top: 25px;
 }
 .uk-nav-default > li > a:hover, .uk-nav-default > li > a:focus{
-    color: #d0021b !important;
+    color: #00a651 !important;
 }
     
 </style>

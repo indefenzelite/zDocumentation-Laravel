@@ -27,7 +27,7 @@
         <div class="hero-search">
             <div class="uk-position-relative">
                 <form class="uk-search uk-search-default uk-width-1-1" name="search-hero" onsubmit="return false;">
-                    <span class="uk-search-icon-flip text-danger uk-icon uk-search-icon" data-uk-search-icon=""><svg
+                    <span class="uk-search-icon-flip text-success uk-icon uk-search-icon" data-uk-search-icon=""><svg
                             width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                             data-svg="search-icon">
                             <circle fill="none" stroke="#000" stroke-width="1.1" cx="9" cy="9" r="7"></circle>
@@ -68,8 +68,7 @@
               @foreach ($sub_category->categories as $item)
                 <div class="uk-card-body">
                     {{$item->name}}
-                </div>
-                  
+                </div> 
               @endforeach
             </div>
             

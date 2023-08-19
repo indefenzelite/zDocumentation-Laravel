@@ -30,19 +30,20 @@
     data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; repeat: true">
     <div class="uk-container uk-container-small mt-3">
         <h2 class="uk-h1 uk-text-center">Browse Category</h2>
-        <p class="uk-text-lead uk-text-center text-danger">Integrate your enterprise with corporate standards.</p>
         <div class="hero-search">
             <div class="uk-position-relative">
-                <form class="uk-search uk-search-default uk-width-1-1" name="search-hero" onsubmit="return false;">
-                    <span class="uk-search-icon-flip text-danger uk-icon uk-search-icon" data-uk-search-icon=""><svg
+                <form action="{{route('index')}}" class="uk-search uk-search-default uk-width-1-1" name="search-hero" id="search-hero-form">
+                    <span class="uk-search-icon-flip text-success uk-icon uk-search-icon" data-uk-search-icon=""><svg
                             width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                             data-svg="search-icon">
                             <circle fill="none" stroke="#000" stroke-width="1.1" cx="9" cy="9" r="7"></circle>
                             <path fill="none" stroke="#000" stroke-width="1.1" d="M14,14 L18,18 L14,14 Z"></path>
                         </svg></span>
-                    <input id="search-hero" class="uk-search-input uk-box-shadow-large" type="search"
-                        placeholder="Search for Categories" autocomplete="off" value="" data-minchars="1"
+
+                    <input id="search-hero" name="search" class="uk-search-input uk-box-shadow-large" type="search"
+                        placeholder="What problem are you facing?" autocomplete="off" value="" data-minchars="1"
                         data-maxitems="30">
+                        <button type="submit" class="d-none"></button>
                 </form>
             </div>
         </div>
@@ -51,17 +52,54 @@
 <!--end section-->
 <div class="uk-section" style="padding-top:40px;">
     <div class="uk-container">
-        <div class="uk-child-width-1-3@m uk-grid-match uk-text-center row uk-grid-stack" id="post" data-uk-grid="">
+        <div class="row" id="post" data-uk-grid="">
+            {{-- @dd($categories);  --}}
             @foreach($categories as $key => $category)
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <a href="{{ route('sub.categories',$category->id) }}">
                     <div class="uk-card uk-card-default uk-box-shadow-medium uk-card-hover uk-card-body uk-inline border-radius-large border-xlight"
-                        style="width:100%;height:100%;">
-                    
-                        <img  src="{{asset('storage/backend/category-icon/'.$category->icon)}}"
-                            alt="Standard Image" srcset="" class="w-25" style="border-radius:80px">
-                        <h3 class="uk-card-title uk-margin">{{$category->name}}</h3>
-                        {{-- <p>{{$category->}}</p> --}}
+                    style="width:100%;height:100%;">
+                    <h3 class="uk-card-title uk-margin">{{$category->name}}</h3>
+                    {{-- @dump($category->latestChildrenCategory ) --}}
+                    <ul  class="pl-11">
+                        @if($category->latestChildrenCategory != null)
+                        @foreach(@$category->childrenCategories as $sub_category)
+                         <li class="uk-margin">{{@$sub_category->name}}
+                            <ul class="uk-nav uk-nav-default  side_menu" style="text-align:left;">
+                                @foreach ($sub_category->categories as $item)
+                                  <ul>
+                                    <li>
+                                        @foreach ($sub_category->childrenCategories as $sub_sub_category)
+                                        @php
+                                            $faqs = App\Models\FAQ::where('category_id',$category->id)->where('sub_category_id',$sub_category->id)->where('sub_sub_category_id',$sub_sub_category->id)->get();
+                                        @endphp
+                                       {{$sub_sub_category->name}}
+                                            <ul class="" style="text-align:left;">
+                                                @foreach($faqs->take(5) as $faq)
+                                                    <li >{{$faq->title}}
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                      @endforeach
+                                    </li>
+                                    @if($faq->count() >= 5)
+                                            <li>
+                                                <a class="btn btn-link" type="submit" href="{{ route('faqs.index',[$category->id,$sub_category->id]) }}">
+                                                View more..
+                                                </a>
+                                            </li>   
+                                    @endif
+                                  </ul>
+                                @endforeach
+                            </ul>
+                        </li>
+                        @endforeach
+                      @else
+                         --   
+                     @endif 
+                      
+                    </ul>
+                  
                     </div>     
                 </a>
             </div>
@@ -100,11 +138,27 @@
                     </div>
                 </a>
             </div> --}}
+              {{-- @if($category->icon)
+                        <img  src="{{asset('storage/backend/category-icon/'.$category->icon)}}"
+                            alt="Image" srcset="" class="w-25" style="border-radius:80px">
+                        @else
+                            <img  src="{{asset('storage/backend/category-icon/'.$category->icon)}}"
+                                alt="Image" srcset="" class="w-25" style="border-radius:80px">
+                       @endif --}}
         </div>
     </div>
 </div>
-
-<!-- Hero End -->
-
-
 @endsection
+<!-- Hero End -->
+@push('script')
+    
+    <script>
+        	$(document).ready(function() {
+            $('#search-hero').on('change', function() {
+                $('#search-hero-form').submit();
+          });
+        });
+	  
+    </script>
+    
+@endpush
