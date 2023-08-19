@@ -14,13 +14,9 @@
 @endphp
 @endsection
 <style>
-    <blade media|%20(max-width%3A%20576px)%20%7B%0D>.align {
-        /* Adjust the slider's layout for small screens */
-        height: 40vh !important;
-        width: 360px;
-        /* For example, you can set a specific width or height, change the positioning, etc. */
-    }
-    }
+   .fw-600{
+        font-weight: 600;
+   }
 
 </style>
 @section('content')
@@ -29,19 +25,18 @@
     style="padding-bottom: 0px; padding-top: 25px;"
     data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; repeat: true">
     <div class="uk-container uk-container-small mt-3">
-        <h2 class="uk-h1 uk-text-center">Browse Category</h2>
+        <h2 class="uk-h1 uk-text-center"><span class="text-success">Gbooks</span> Documentation</h2>
         <div class="hero-search">
             <div class="uk-position-relative">
                 <form action="{{route('index')}}" class="uk-search uk-search-default uk-width-1-1" name="search-hero" id="search-hero-form">
-                    <span class="uk-search-icon-flip text-success uk-icon uk-search-icon" data-uk-search-icon=""><svg
+                    <span class="uk-search-icon-flip text-success uk-icon uk-search-icon" ><svg
                             width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                             data-svg="search-icon">
                             <circle fill="none" stroke="#000" stroke-width="1.1" cx="9" cy="9" r="7"></circle>
                             <path fill="none" stroke="#000" stroke-width="1.1" d="M14,14 L18,18 L14,14 Z"></path>
                         </svg></span>
-
-                    <input id="search-hero" name="search" class="uk-search-input uk-box-shadow-large" type="search"
-                        placeholder="What problem are you facing?" autocomplete="off" value="" data-minchars="1"
+                    <input id="search-hero" class="uk-search-input uk-box-shadow-large" name="search" type="search"
+                        placeholder="Type your question..." autocomplete="off" value="" 
                         data-maxitems="30">
                         <button type="submit" class="d-none"></button>
                 </form>
@@ -52,39 +47,40 @@
 <!--end section-->
 <div class="uk-section" style="padding-top:40px;">
     <div class="uk-container">
-        <div class="row" id="post" data-uk-grid="">
-            {{-- @dd($categories);  --}}
+        <div class="row" id="post">
             @foreach($categories as $key => $category)
-            <div class="col-md-3">
-                <a href="{{ route('sub.categories',$category->id) }}">
-                    <div class="uk-card uk-card-default uk-box-shadow-medium uk-card-hover uk-card-body uk-inline border-radius-large border-xlight"
-                    style="width:100%;height:100%;">
-                    <h3 class="uk-card-title uk-margin">{{$category->name}}</h3>
-                    {{-- @dump($category->latestChildrenCategory ) --}}
-                    <ul  class="pl-11">
+            <div class="col-md-3" style="">
+                <div class="uk-card p-0" style="width:100%;height:100%;">
+                    <small class="text-muted mb-0">{{$category->name}}</small>
+                    <ul  class="pl-11 mt-0 list-unstyled">
                         @if($category->latestChildrenCategory != null)
                         @foreach(@$category->childrenCategories as $sub_category)
-                         <li class="uk-margin">{{@$sub_category->name}}
+                         <li class="uk-margin">
+                            <span class="mb-0 text-muted">{{@$sub_category->name}}</h6>
                             <ul class="uk-nav uk-nav-default  side_menu" style="text-align:left;">
                                 @foreach ($sub_category->categories as $item)
-                                  <ul>
-                                    <li>
-                                        @foreach ($sub_category->childrenCategories as $sub_sub_category)
-                                        @php
-                                            $faqs = App\Models\FAQ::where('category_id',$category->id)->where('sub_category_id',$sub_category->id)->where('sub_sub_category_id',$sub_sub_category->id)->get();
-                                        @endphp
-                                       {{$sub_sub_category->name}}
-                                            <ul class="" style="text-align:left;">
-                                                @foreach($faqs->take(5) as $faq)
-                                                    <li >{{$faq->title}}
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                      @endforeach
-                                    </li>
-                                    @if($faq->count() >= 5)
+                                  <ul class="pl-10">
+                                        <li>
+                                            @foreach ($sub_category->childrenCategories as $sub_sub_category)
+                                            @php
+                                                $faqs = App\Models\FAQ::where('category_id',$category->id)->where('sub_category_id',$sub_category->id)->where('sub_sub_category_id',$sub_sub_category->id)->get();
+                                            @endphp
+                                            <h6 class="mb-0 text-muted"> {{$sub_sub_category->name}}</h6> 
+                                                <ul class="" style="text-align:left;">
+                                                    @foreach($faqs->take(5) as $faq)
+                                                    <a href="{{route('faqs.index',[$category->id,$sub_category->id,$faq->id]) }}">
+                                                        <li>
+                                                            <h5 class="fw-600 mb-1">{{$faq->title}}</h5>
+                                                        </li>
+                                                    </a>
+                                                    @endforeach
+                                                </ul>
+                                        @endforeach
+                                        </li>
+                                  
+                                    @if(@$faqs->count() >= 5)
                                             <li>
-                                                <a class="btn btn-link" type="submit" href="{{ route('faqs.index',[$category->id,$sub_category->id]) }}">
+                                                <a class="btn btn-link" type="submit" href="{{ route('faqs.index',[$category_id,$sub_category->id]) }}">
                                                 View more..
                                                 </a>
                                             </li>   
@@ -100,55 +96,14 @@
                       
                     </ul>
                   
-                    </div>     
-                </a>
+                </div>     
             </div>
             @endforeach
-            {{-- <div class="uk-grid-margin uk-first-column"><a
-                    href="http://localhost/my-projects/NIMS-Laravel/public_html/standard/2/roles">
-                    <div class="uk-card uk-card-default uk-box-shadow-medium uk-card-hover uk-card-body uk-inline border-radius-large border-xlight"
-                        style="width:100%;height:100%;"><span data-uk-icon="icon: cog; ratio: 3.4" class="uk-icon"><svg
-                                width="68" height="68" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                data-svg="cog">
-                                <circle fill="none" stroke="#000" cx="9.997" cy="10" r="3.31"></circle>
-                                <path fill="none" stroke="#000"
-                                    d="M18.488,12.285 L16.205,16.237 C15.322,15.496 14.185,15.281 13.303,15.791 C12.428,16.289 12.047,17.373 12.246,18.5 L7.735,18.5 C7.938,17.374 7.553,16.299 6.684,15.791 C5.801,15.27 4.655,15.492 3.773,16.237 L1.5,12.285 C2.573,11.871 3.317,10.999 3.317,9.991 C3.305,8.98 2.573,8.121 1.5,7.716 L3.765,3.784 C4.645,4.516 5.794,4.738 6.687,4.232 C7.555,3.722 7.939,2.637 7.735,1.5 L12.263,1.5 C12.072,2.637 12.441,3.71 13.314,4.22 C14.206,4.73 15.343,4.516 16.225,3.794 L18.487,7.714 C17.404,8.117 16.661,8.988 16.67,10.009 C16.672,11.018 17.415,11.88 18.488,12.285 L18.488,12.285 Z">
-                                </path>
-                            </svg></span>
-                        <h3 class="uk-card-title uk-margin">S2</h3>
-                        <p>S2</p>
-                    </div>
-                </a>
-            </div> --}}
-            {{-- <div class="uk-grid-margin uk-first-column"><a
-                    href="http://localhost/my-projects/NIMS-Laravel/public_html/standard/3/roles">
-                    <div class="uk-card uk-card-default uk-box-shadow-medium uk-card-hover uk-card-body uk-inline border-radius-large border-xlight"
-                        style="width:100%;height:100%;"><span data-uk-icon="icon: cog; ratio: 3.4" class="uk-icon"><svg
-                                width="68" height="68" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
-                                data-svg="cog">
-                                <circle fill="none" stroke="#000" cx="9.997" cy="10" r="3.31"></circle>
-                                <path fill="none" stroke="#000"
-                                    d="M18.488,12.285 L16.205,16.237 C15.322,15.496 14.185,15.281 13.303,15.791 C12.428,16.289 12.047,17.373 12.246,18.5 L7.735,18.5 C7.938,17.374 7.553,16.299 6.684,15.791 C5.801,15.27 4.655,15.492 3.773,16.237 L1.5,12.285 C2.573,11.871 3.317,10.999 3.317,9.991 C3.305,8.98 2.573,8.121 1.5,7.716 L3.765,3.784 C4.645,4.516 5.794,4.738 6.687,4.232 C7.555,3.722 7.939,2.637 7.735,1.5 L12.263,1.5 C12.072,2.637 12.441,3.71 13.314,4.22 C14.206,4.73 15.343,4.516 16.225,3.794 L18.487,7.714 C17.404,8.117 16.661,8.988 16.67,10.009 C16.672,11.018 17.415,11.88 18.488,12.285 L18.488,12.285 Z">
-                                </path>
-                            </svg></span>
-                        <h3 class="uk-card-title uk-margin">Your Success That's Our Business Launch your campaign and
-                            benefit from our expertise on designing and managing conversion centered bootstrap v5 html
-                            page.</h3>
-                        <p>Your Success That's Our Business Launch your campaign and benefit from our expe...</p>
-                    </div>
-                </a>
-            </div> --}}
-              {{-- @if($category->icon)
-                        <img  src="{{asset('storage/backend/category-icon/'.$category->icon)}}"
-                            alt="Image" srcset="" class="w-25" style="border-radius:80px">
-                        @else
-                            <img  src="{{asset('storage/backend/category-icon/'.$category->icon)}}"
-                                alt="Image" srcset="" class="w-25" style="border-radius:80px">
-                       @endif --}}
         </div>
     </div>
 </div>
 @endsection
+
 <!-- Hero End -->
 @push('script')
     

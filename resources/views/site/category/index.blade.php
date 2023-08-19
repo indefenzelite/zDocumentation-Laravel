@@ -26,7 +26,7 @@
 
         <div class="hero-search">
             <div class="uk-position-relative">
-                <form class="uk-search uk-search-default uk-width-1-1" name="search-hero" onsubmit="return false;">
+                <form action="{{route('sub.categories',$category_id)}}" class="uk-search uk-search-default uk-width-1-1" name="search-hero" id="search-hero-form">
                     <span class="uk-search-icon-flip text-success uk-icon uk-search-icon" data-uk-search-icon=""><svg
                             width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                             data-svg="search-icon">
@@ -36,6 +36,7 @@
                     <input id="search-hero" class="uk-search-input uk-box-shadow-large" type="search"
                         placeholder="Search for Categories" autocomplete="off" value="" data-minchars="1"
                         data-maxitems="30">
+                        <button type="submit" class="d-none"></button>
                 </form>
             </div>
         </div>
@@ -75,8 +76,14 @@
         @endforeach
     </div>
 </div>
-
 <!-- Hero End -->
-
-
 @endsection
+@push('script')
+    <script>
+        $(document).ready(function() {
+            $('#search-hero').on('change', function() {
+                $('#search-hero-form').submit();
+          });
+        });
+    </script>
+@endpush

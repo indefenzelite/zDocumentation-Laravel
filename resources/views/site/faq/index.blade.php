@@ -7,16 +7,19 @@
     display: flex;
     justify-content: center;
     margin-top: 25px;
-}
-.uk-nav-default > li > a:hover, .uk-nav-default > li > a:focus{
-    color: #00a651 !important;
-}
+    }
+    .uk-nav-default > li > a:hover, .uk-nav-default > li > a:focus{
+        color: #00a651 !important;
+    }
+    .emoji-icon{
+        filter: grayscale(1)
+    }
     
 </style>
 
 @section('content')
 <div class="uk-section-">
-    <div class="uk-container mt-5">
+    <div class="uk-container mt-3">
         <div class="uk-grid-large" data-uk-grid>
             <div class="sidebar-fixed-width uk-visible@m">
                 <div class="sidebar-docs uk-position-fixed uk-margin-top px-2" style="background: #fbfbfd;"

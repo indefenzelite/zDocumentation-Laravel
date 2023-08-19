@@ -27,6 +27,7 @@ use Illuminate\Support\Str;
 */
 
 Route::get('/qb', function () {
+    return view('test');
     function calculateExclusivePrice($inclusivePrice, $taxRate) {
         // Convert the tax rate to a decimal (e.g., 10% -> 0.1)
         $taxRateDecimal = $taxRate / 100;

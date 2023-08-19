@@ -8,7 +8,7 @@
            }
        }
    </style>
-   <footer class="uk-section uk-text-center uk-text-muted py-0 mt-auto" style="background: #EFEFEF;">
+   <footer class="uk-section uk-text-center uk-text-muted py-0  footer-position" style="background: #EFEFEF;">
 	<div class="uk-container uk-container-small">
 {{-- 		
 		<div class="">
