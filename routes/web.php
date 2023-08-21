@@ -12,6 +12,7 @@ use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\FaqController;
 use App\Http\Controllers\Site\ContactController;
 use App\Http\Controllers\Site\SiteMapController;
+use App\Http\Controllers\Site\VoteController;
 use App\Http\Controllers\WorldController;
 use Illuminate\Support\Str;
 
@@ -87,9 +88,12 @@ Route::get('/blogs', [BlogController::class,'index'])->name('blogs');
 Route::get('/blog/{slug}', [BlogController::class,'show'])->name('blog.show');
 // Route::get('/faqs', [FaqController::class,'index'])->name('faqs');
 Route::get('/posts', [HomeController::class,'loadOnScroll'])->name('posts');
-Route::get('/faq/{category_id}', [FaqController::class,'index'])->name('faqs.index');
+Route::get('/faq/{id}', [FaqController::class,'index'])->name('faqs.index');
 
 
+
+// Vote
+Route::post('/vote/store/', [VoteController::class,'store'])->name('vote.store');
 
 // Contact
 Route::get('/contact', [ContactController::class,'index'])->name('contact');

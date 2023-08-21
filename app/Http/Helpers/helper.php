@@ -742,3 +742,8 @@ if (!function_exists('getFaqByCreatedBy')) {
         return $faqs = App\Models\Faq::where('created_by',$user_id)->count();
     }
 }
+if (!function_exists('getUserVote')) {
+    function getUserVote($ip_address,$status) {
+        return $vote = App\Models\Vote::where('ip_address',$ip_address)->where('status',$status)->first();
+    }
+}

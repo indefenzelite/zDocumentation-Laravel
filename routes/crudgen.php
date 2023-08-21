@@ -15,7 +15,7 @@ Route::group(
 
 
     
-Route::group(['middleware' => ['can:view_votes'],'namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin/votes','as' =>'admin.votes.'], function () {
+    Route::group(['middleware' => ['can:view_votes'],'namespace' => 'App\Http\Controllers\Admin', 'prefix' => 'admin/votes','as' =>'admin.votes.'], function () {
         Route::get('', ['uses' => 'VoteController@index', 'as' => 'index']);
         Route::any('/print', ['uses' => 'VoteController@print', 'as' => 'print']);
         Route::get('create', ['uses' => 'VoteController@create', 'as' => 'create']);

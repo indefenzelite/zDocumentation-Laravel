@@ -35,7 +35,7 @@
                             <circle fill="none" stroke="#000" stroke-width="1.1" cx="9" cy="9" r="7"></circle>
                             <path fill="none" stroke="#000" stroke-width="1.1" d="M14,14 L18,18 L14,14 Z"></path>
                         </svg></span>
-                    <input id="search-hero" class="uk-search-input uk-box-shadow-large" name="search" type="search"
+                    <input id="search-hero" class="uk-search-input uk-box-shadow-large" name="search" type="search" value="{{request()->get('search')}}"
                         placeholder="Type your question..." autocomplete="off" value="" 
                         data-maxitems="30">
                         <button type="submit" class="d-none"></button>
@@ -98,15 +98,15 @@
             @endforeach --}}
             <div class="col-md-4">
                 <div class="uk-card p-0">
-                    <small class="text-muted mb-0">Registration</small>
+                    <small class="text-muted mb-0">Login/Registration</small>
                     <ul class="list-unstyled pl-10 mt-0">
                         <li>
                             @php
-                                $faqs = App\Models\Faq::where('category_id',104)->where('sub_category_id',null)->where('sub_sub_category_id',null)->take(18)->get();
+                                $faqs = App\Models\Faq::where('category_id',104)->take(18)->get();
                             @endphp
                             <ul class="list-unstyled" style="text-align:left;">
                                 @foreach($faqs as $faq)
-                                    <a href="{{route('faqs.index',$faq->category_id) }}">
+                                    <a href="{{route('faqs.index',[$faq->id,'category_id' => $faq->category_id]) }}">
                                         <li>
                                             <span class="text-success fw-600 mb-1">{{$faq->title}}</span>
                                         </li>
@@ -115,38 +115,17 @@
                             </ul>
                         </li>
                     </ul>
-                </div>     
-
-                <div class="uk-card p-0">
-                    <small class="text-muted mb-0">Login</small>
-                    <ul class="list-unstyled pl-10 mt-0">
-                        <li>
-                            @php
-                                $faqs = App\Models\Faq::where('category_id',103)->where('sub_category_id',null)->where('sub_sub_category_id',null)->take(18)->get();
-                            @endphp
-                            <ul class="list-unstyled" style="text-align:left;">
-                                @foreach($faqs as $faq)
-                                    <a href="{{route('faqs.index',103) }}">
-                                        <li>
-                                            <span class="text-success fw-600 mb-1">{{$faq->title}}</span>
-                                        </li>
-                                    </a>
-                                @endforeach
-                            </ul>
-                        </li>
-                    </ul>
-                </div> 
-
+                </div>
                 <div class="uk-card p-0">
                     <small class="text-muted mb-0">Support Ticket</small>
                     <ul class="list-unstyled pl-10 mt-0">
                         <li>
                             @php
-                                $faqs = App\Models\Faq::where('category_id',102)->where('sub_category_id',null)->where('sub_sub_category_id',null)->take(18)->get();
+                                $faqs = App\Models\Faq::where('category_id',102)->take(18)->get();
                             @endphp
                             <ul class="list-unstyled" style="text-align:left;">
                                 @foreach($faqs as $faq)
-                                    <a href="{{route('faqs.index',102) }}">
+                                    <a href="{{route('faqs.index',[$faq->id,'category_id' => $faq->category_id]) }}">
                                         <li>
                                             <span class="text-success fw-600 mb-1">{{$faq->title}}</span>
                                         </li>
@@ -162,11 +141,11 @@
                     <ul class="list-unstyled pl-10 mt-0">
                         <li>
                             @php
-                                $faqs = App\Models\Faq::where('category_id',44)->where('sub_category_id',null)->where('sub_sub_category_id',null)->take(18)->get();
+                                $faqs = App\Models\Faq::where('category_id',44)->take(18)->get();
                             @endphp
                             <ul class="list-unstyled" style="text-align:left;">
                                 @foreach($faqs as $faq)
-                                    <a href="{{route('faqs.index',44) }}">
+                                    <a href="{{route('faqs.index',[$faq->id,'category_id' => $faq->category_id]) }}">
                                         <li>
                                             <span class="text-success fw-600 mb-1">{{$faq->title}}</span>
                                         </li>
@@ -190,11 +169,11 @@
                     <ul class="list-unstyled pl-10 mt-0">
                         <li>
                             @php
-                                $faqs = App\Models\Faq::where('sub_category_id',62)->take(18)->get();
+                                $faqs = App\Models\Faq::where('category_id',45)->take(18)->get();
                             @endphp
                             <ul class="list-unstyled" style="text-align:left;">
                                 @foreach($faqs as $faq)
-                                    <a href="{{route('faqs.index',62) }}">
+                                    <a href="{{route('faqs.index',[$faq->id,'category_id' => $faq->category_id]) }}">
                                         <li>
                                             <span class="text-success fw-600 mb-1">{{$faq->title}}</span>
                                         </li>
@@ -211,11 +190,11 @@
                     <ul class="list-unstyled pl-10 mt-0">
                         <li>
                             @php
-                                $faqs = App\Models\Faq::where('sub_category_id',73)->take(18)->get();
+                                $faqs = App\Models\Faq::where('category_id',46)->take(18)->get();
                             @endphp
                             <ul class="list-unstyled" style="text-align:left;">
                                 @foreach($faqs as $faq)
-                                    <a href="{{route('faqs.index',73) }}">
+                                    <a href="{{route('faqs.index',[$faq->id,'category_id' => $faq->category_id]) }}">
                                         <li>
                                             <span class="text-success fw-600 mb-1">{{$faq->title}}</span>
                                         </li>

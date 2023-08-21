@@ -25,7 +25,8 @@
         color: #00a651 !important;
     }
     .emoji-icon{
-        filter: grayscale(1)
+        filter: grayscale(1);
+        width: 30px;
     }
     
 </style>
@@ -42,34 +43,25 @@
                             Table of content
                         </div>
                         <div class="uk-position-relative side_duties" id="side_duties">
-                            @php
-                                $faqs = App\Models\FAQ::where('category_id',$category->id)->get();
-                            @endphp
-                            <div style="text-align:left;margin:0;font-weight:500" class="pl-2">  
-                                {{$category->name}}
-                            </div>
-                                <ul class="uk-nav uk-nav-default doc-nav side_menu mt-0" style="text-align:left;">
-                                    @foreach ($faqs as $faq)
-                                        <li class="checkRequest2 @if($category->id != null && $faq->category_id == $category->id) faq-active @endif">
-                                            <a href="javascript:void(0)" data-id="2" onclick="loadFaqsData(event, {{$category->id}},{{$faq->id}})">
-                                                {{$faq->title}}
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                          {{-- @foreach ($sub_sub_categories as $sub_sub_category)
-                            @php
-                                $faqs = App\Models\FAQ::where('category_id',$c_id)->where('sub_category_id',$s_id)->where('sub_sub_category_id',$sub_sub_category->id)->get();
-                            @endphp
-                            <div style="text-align:left;margin:0;font-weight:500" class="" >{{$sub_sub_category->name}}</div>
-                                <ul class="uk-nav uk-nav-default doc-nav side_menu" style="text-align:left;">
-                                    @foreach ($faqs as $faq)
-                                    <li class="checkRequest2 @if($id != null && $faq->id == $id) faq-active @endif"><a href="javascript:void(0)" data-id="2"
-                                            onclick="loadFaqsData(event, {{$c_id}}, {{$s_id}}, {{$faq->id}})">{{$faq->title}}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                          @endforeach --}}
+                            @if ($category)
+                                @foreach ($category->categories as $sub_category)
+                                    @php
+                                        $faq_ques = App\Models\FAQ::where('category_id',$category->id)->where('sub_category_id',$sub_category->id)->get();
+                                    @endphp
+                                    <div style="text-align:left;margin:0;font-weight:500" class="" >
+                                        {{$sub_category->name}}
+                                    </div>
+                                    <ul class="uk-nav uk-nav-default doc-nav side_menu" style="text-align:left;">
+                                        @foreach ($faq_ques as $faq_que)
+                                            <li class="checkRequest2 @if($faq_que->id == $id) faq-active @endif">
+                                                <a href="javascript:void(0)" data-id="2" onclick="loadFaqsData(event,{{$faq_que->id}},{{$faq_que->category_id}})">{{$faq_que->title}}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endforeach
+                            @else
+                                <small class="text-center text-muted">No Categories Found!</small>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -87,19 +79,32 @@
   <script>
     var url = "{{url('/')}}";
 
-    function loadFaqsData(e,c_id,sub_category_id,faq_id) {
+    function loadFaqsData(e,faq_id,categorry_id) {
         $('.checkRequest2').removeClass('faq-active');
         $(this).addClass('faq-active');
         $.ajax({
-            url: url + '/category/' + c_id + '/sub-category/' + sub_category_id + '/faq/' + faq_id,
+            url: url + '/faq/' + faq_id + '?category_id=' + categorry_id,
             type: 'get',
             data: { id: faq_id },
             success: function (res) {
                 $('#ajax-container').html(res.data);
             }
         });
-        history.pushState({}, "", url + '/category/' + c_id + '/sub-category/' + sub_category_id + '/faq/' + faq_id);
+        history.pushState({}, "", url + '/faq/' + faq_id + '?category_id=' + categorry_id);
     }
+    $(document).on('click','.addVote',function(){
+        $('.emoji-icon').removeClass('w-40');
+        let faq_id = $(this).data('faq_id');
+        let status = $(this).data('status');
+        $.ajax({
+            url: url + '/vote/store/',
+            type: 'post',
+            data: { "_token": "{{ csrf_token() }}",faq_id: faq_id,status:status},
+            success: function (res) {
+                $('.icon-'+res.status_id).addClass('w-40');
+            }
+        });
+    })
   </script>
 
 @endpush

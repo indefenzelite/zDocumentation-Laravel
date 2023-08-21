@@ -12842,3 +12842,9 @@ pre.highlight {
 .faq-active>a{
   color: #00a651 !important;
 }
+.w-30{
+  width:30px;
+}
+.w-40{
+  width:40px;
+}

@@ -24,7 +24,7 @@
 				</div>
 			</div>
 		</div> --}}
-		<div class="mt-2 uk-text-small copyright link-secondary">Made by Gbooks Skills</div>
+		<div class="my-1 uk-text-small copyright link-secondary">Made by Gbooks Skills</div>
 	</div>
 </footer>
    <!-- Footer End -->
