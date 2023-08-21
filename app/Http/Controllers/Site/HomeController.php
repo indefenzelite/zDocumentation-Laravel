@@ -43,7 +43,7 @@ class HomeController extends Controller
         }
          $categories = $categories->whereHas('categoryType',function($q){
             $q->where('code','FaqCategories');
-        })->where('level',1)->get();
+        })->where('level',1)->whereHas('categories')->get();
         $app_settings = getSetting(['app_core']);
         $contents = getParagraphContent(['home_title','home_description']);
         return view('site.home.index', compact('metas', 'contents', 'app_settings','categories'));
@@ -151,16 +151,6 @@ class HomeController extends Controller
 
             return redirect('/');
         }
-    }
-
-    public function subCategories(Request $request){
-         $category = Category::where('id',$request->id)->first();
-         $sub_categories = $category->childrenCategories;
-         if (request()->has('search') && request()->get('search')) {
-            $sub_categories->where('name', 'like', '%'.request()->get('search').'%');
-        }
-         $category_id = $request->id;
-        return  view('site.category.index',compact('sub_categories','category_id'));
     }
 
     public function loadOnScroll(Request $request)

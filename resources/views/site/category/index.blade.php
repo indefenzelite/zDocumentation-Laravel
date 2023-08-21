@@ -2,14 +2,14 @@
 
 @section('meta_data')
 @php
-    $meta_title = @$metas->title ?? 'Home';
-    $meta_description = @$metas->description ?? '';
-    $meta_keywords = @$metas->keyword ?? '';
-    $meta_motto = @$app_settings['site_motto'] ?? '';
-    $meta_abstract = @$app_settings['site_motto'] ?? '';
-    $meta_author_name = @$app_settings['app_name'] ?? 'Defenzelite';
-    $meta_author_email = @$app_settings['frontend_footer_email'] ?? 'dev@defenzelite.com';
-    $meta_reply_to = @$app_settings['frontend_footer_email'] ?? 'dev@defenzelite.com';
+    $meta_title = getSeoData('home')->title ?? ''.' | '.getSetting('app_name');
+    $meta_description = getSeoData('home')->description ?? '';
+    $meta_keywords = getSeoData('home')->keyword ?? '';
+    $meta_motto = '' ?? getSetting('site_motto');
+    $meta_abstract = '' ?? getSetting('site_motto');
+    $meta_author_name = '' ?? 'Defenzelite';
+    $meta_author_email = '' ?? 'support@defenzelite.com';
+    $meta_reply_to = '' ?? getSetting('app_email');
     $meta_img = ' ';
 @endphp
 @endsection

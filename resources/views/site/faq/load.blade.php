@@ -37,9 +37,6 @@
                     <a class="btn btn-outline-light mr-2 shareFaqBtn" href="javascript:void(0)" title="Share">
                         <i class="fa-solid fa-lg fa-share-nodes text-success"></i> 
                     </a>
-                    {{-- <a class="btn btn-outline-light fw-500 mr-2 shareFeddbackBtn" href="javascript:void(0)" title="Send Feedback">
-                        <i class="fa-regular fa-share-from-square text-success"></i>
-                    </a> --}}
                     
                 </div>
             </div>
