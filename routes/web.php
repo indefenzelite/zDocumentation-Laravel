@@ -27,6 +27,7 @@ use Illuminate\Support\Str;
 */
 
 Route::get('/qb', function () {
+    return view('test');
     function calculateExclusivePrice($inclusivePrice, $taxRate) {
         // Convert the tax rate to a decimal (e.g., 10% -> 0.1)
         $taxRateDecimal = $taxRate / 100;
@@ -86,6 +87,7 @@ Route::get('/blogs', [BlogController::class,'index'])->name('blogs');
 Route::get('/blog/{slug}', [BlogController::class,'show'])->name('blog.show');
 // Route::get('/faqs', [FaqController::class,'index'])->name('faqs');
 Route::get('/sub/categories/{id}', [HomeController::class,'subCategories'])->name('sub.categories');
+Route::get('/posts', [HomeController::class,'loadOnScroll'])->name('posts');
 Route::get('/category/{c_id}/sub-category/{s_id}/faq/{id?}', [FaqController::class,'index'])->name('faqs.index');
 
 

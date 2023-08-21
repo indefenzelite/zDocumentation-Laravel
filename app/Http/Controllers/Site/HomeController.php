@@ -30,7 +30,20 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $metas = getSeoData('home');
-        $categories = getCategoriesByCode('FaqCategories');
+        // $categories = getCategoriesByCode('FaqCategories');
+        $categories = Category::query();
+        if (request()->get('search')) {
+            $categories->where(function($q){
+               $q->whereHas('childrenCategories',function($q){
+                    $q->where('id', 'like', '%'.request()->get('search').'%')
+                  ->orWhere('name', 'like', '%'.request()->get('search').'%');
+                })->orWhere('id', 'like', '%'.request()->get('search').'%')
+                ->orWhere('name', 'like', '%'.request()->get('search').'%');
+            });
+        }
+         $categories = $categories->whereHas('categoryType',function($q){
+            $q->where('code','FaqCategories');
+        })->where('level',1)->get();
         $app_settings = getSetting(['app_core']);
         $contents = getParagraphContent(['home_title','home_description']);
         return view('site.home.index', compact('metas', 'contents', 'app_settings','categories'));
@@ -141,11 +154,24 @@ class HomeController extends Controller
     }
 
     public function subCategories(Request $request){
-        
          $category = Category::where('id',$request->id)->first();
          $sub_categories = $category->childrenCategories;
+         if (request()->has('search') && request()->get('search')) {
+            $sub_categories->where('name', 'like', '%'.request()->get('search').'%');
+        }
          $category_id = $request->id;
         return  view('site.category.index',compact('sub_categories','category_id'));
     }
 
+    public function loadOnScroll(Request $request)
+    {
+       $standard = Standard::when($request->has('search'),function($q) use ($request){
+   
+        $q->where('name','like','%'.$request->get('search').'%');
+       })->paginated()->get();
+        if($request->ajax()){
+        
+            return response()->json(['post'=>$standard]);
+        } 
+    }
 }
