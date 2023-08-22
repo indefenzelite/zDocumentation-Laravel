@@ -743,8 +743,8 @@ if (!function_exists('getFaqByCreatedBy')) {
     }
 }
 if (!function_exists('getUserVote')) {
-    function getUserVote($ip_address,$status) {
-        return $vote = App\Models\Vote::where('ip_address',$ip_address)->where('status',$status)->first();
+    function getUserVote($faq_id,$ip_address,$status) {
+        return $vote = App\Models\Vote::where('faq_id',$faq_id)->where('ip_address',$ip_address)->where('status',$status)->first();
     }
 }
 if (!function_exists('getVoteCountByStatus')) {

@@ -53,16 +53,29 @@ class HomeController extends Controller
     
      public function search(){
         $faqs = Faq::query();
-        if (request()->has('search') && request()->get('search')) {
-            $faqs->where('title', 'like', '%'.request()->get('search').'%')
-                ->orWhereHas(
-                    'category',
-                    function ($q) {
-                        $q->where('name', 'like', '%'.request()->get('search').'%');
-                    }
-                );
+        if(request()->has('search')){
+                if (request()->has('search') && request()->get('search')) {
+                    $faqs->where('title', 'like', '%'.request()->get('search').'%')
+                        ->orWhereHas(
+                            'category',
+                            function ($q) {
+                                $q->where('name', 'like', '%'.request()->get('search').'%');
+                            }
+                        );
+                }
         }
-        $faqs= $faqs->latest()->get();
+        else{
+            if (request()->has('query') && request()->get('query')) {
+                $faqs->where('title', 'like', '%'.request()->get('query').'%')
+                    ->orWhereHas(
+                        'category',
+                        function ($q) {
+                            $q->where('name', 'like', '%'.request()->get('query').'%');
+                        }
+                    );
+            }
+        }
+          $faqs= $faqs->latest()->get();
          return view('site.home.search',compact('faqs'));
      }
     public function notFound()

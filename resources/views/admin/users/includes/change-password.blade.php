@@ -2,14 +2,14 @@
     <form class="row" action="{{route('admin.profile.update.password',$user->id)}}" method="POST">
         @csrf
         <input type="hidden" name="request_with" value="password">
-        <div class="col-12">
+        {{-- <div class="col-12">
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="password">Current Password <span class="text-danger">*</span></label>
                     <input required type="password" class="form-control" name="current_password" placeholder="Current Password" id="current-password">
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-12">
             <div class="row">
                 <div class="form-group col-md-6">

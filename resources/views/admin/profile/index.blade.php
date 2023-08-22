@@ -171,9 +171,8 @@
                                         <div class="text-center text-muted w-75 mx-auto mb-4">
                                             Set up your two factor authentication by scanning the barcode below. <br> Use <b><a href="https://safety.google/authentication/">Google Authenticator</a></b> app for continuing.
                                         </div>
-        
-                                        <button class="btn btn-success">I've Scanned QR</button>
-                                        </div>
+                        
+                                          <button class="btn btn-success">I've Scanned QR</button>
                                     </div>
                                 @else
                                     <div class="card-body text-center">

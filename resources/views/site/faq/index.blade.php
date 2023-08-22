@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('meta_data')
     @php
-	$meta_title = getSeoData('faq')->title ?? ''.' | '.getSetting('app_name');
-    $meta_description = getSeoData('faq')->description ?? '';
+	$meta_title = $faq->title ;
+    $meta_description = \Str::limit(strip_tags($faq->description),256, '...')  ?? '';
     $meta_keywords = getSeoData('faq')->keyword ?? '';
     $meta_motto = '' ?? getSetting('site_motto');
     $meta_abstract = '' ?? getSetting('site_motto');
@@ -73,10 +73,12 @@
                 
             </div>
         </div>
+        {{-- <button type="button" class="btn btn-primary" id="popover-trigger" data-bs-toggle="popover" title="Popover Title" data-bs-content="Popover Content">Click Me</button> --}}
     </div>
-   
+    
 </div>
 @endsection
+@include('site.faq.modal.share-modal')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @push('script')
   <script>
@@ -109,16 +111,25 @@
         });
     })
     $(document).ready(function() {
-          
         $("html, div").animate({
             scrollTop: $('.sidebar-docs').get(0).scrollHeight
-                }, 5);
-            });
+        }, 5);
 
-          
-     $(function () {
-        $('[data-bs-toggle="popover"]').popover();
+        $('#shareFaq').socialSharingPlugin({            
+            url: '',
+            title: '',
+            description: '',
+            img: $('meta[property="og:image"]').attr('content'),
+            btnClass: 'btn btn-light',
+            enable: null,
+            responsive: false,
+            mobilePosition: 'left',
+            copyMessage: 'Copy to clipboard',
+            enable: ['copy','facebook','<a href="https://www.jqueryscript.net/tags.php?/twitter/">twitter</a>','pinterest','linkedin','whatsapp']
+        });
     });
-    
+
+            
+     
   </script>
 @endpush

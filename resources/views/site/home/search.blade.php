@@ -45,32 +45,31 @@
     </div>
 </div>
 <!--end section-->
-<div class="uk-section" style="padding-top:40px;">
+<div class="uk-section" style="padding-top:20px;">
     <div class="uk-container">
         <div class="row" id="post">
-            <div class="col-md-12">
-                @forelse($faqs as  $faq)
-                        <div class="uk-card p-0">
-                            <small class="text-muted mb-0">Login/Registration</small>
-                            <ul class="list-unstyled pl-10 mt-0">
-                                <li>
-                                    <ul class="list-unstyled" style="text-align:left;">
-                                        
-                                            <a href="{{route('faqs.index',[$faq->id,'category_id' => $faq->category_id]) }}">
-                                                <li>
-                                                    <span class="text-success fw-600 mb-1">{{$faq->title}}</span>
-                                                </li>
-                                            </a>
-                                    
-                                    </ul>
-                                </li>
+            <div class="col-md-6 mx-auto">
+                 <small class="text-muted mb-2">{{$faqs->count()}} Results Found</small>
+                 <br>
+                <div class="uk-card p-0">
+                    <ul class="list-unstyled mt-0">
+                        @forelse($faqs as  $faq)
+                        <li>
+                            <ul class="list-unstyled" style="text-align:left;">
+                                
+                                    <a href="{{route('faqs.index',[$faq->id,'category_id' => $faq->category_id]) }}">
+                                        <li>
+                                            <span class="text-success fw-600 mb-1">{{$faq->title}}</span>
+                                        </li>
+                                    </a>
+                            
                             </ul>
-                        </div>
-                    
-                @empty
-                    <span class="text-center text-success">No Data Found!</span>
-                @endforelse
-               
+                        </li>
+                            @empty
+                            <span class="text-center text-success">No Data Found!</span>
+                        @endforelse
+                    </ul>
+                </div>
             </div>
         </div>
     </div>

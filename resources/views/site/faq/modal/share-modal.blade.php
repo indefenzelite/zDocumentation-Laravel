@@ -1,19 +1,12 @@
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Modal Content Goes Here
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save Changes</button>
-            </div>
-        </div>
-    </div>
+<div id="shareModal" class="modal">
+    <span class="close" id="closeModal">&times;</span>
+    <h2>Share This Link</h2>
+    <p>Share this link on social media:</p>
+    <!-- Add your social sharing links here -->
+    <a href="#" target="_blank">Facebook</a><br>
+    <a href="#" target="_blank">Twitter</a><br>
+    <a href="#" target="_blank">LinkedIn</a><br>
+    <!-- End of social sharing links -->
 </div>
 
  

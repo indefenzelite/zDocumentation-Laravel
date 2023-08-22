@@ -4,12 +4,13 @@
     $segment2 = request()->segment(2);
     $segment3 = request()->segment(3);
     $segment4 = request()->segment(4);
+    $category= App\Models\CategoryType::where('code','FaqCategories')->first();
 @endphp
 <div class="app-sidebar colored">
     <div class="sidebar-header">
         <a class="header-brand" href="{{route('admin.dashboard.index')}}">
             <div class="logo-img">
-               <img height="35px" src="{{ getBackendLogo(getSetting('app_logo'))}}" class="header-brand-img" title="App Logo"> 
+               <img height="30px" src="{{ getBackendLogo(getSetting('app_logo'))}}" class="header-brand-img" title="App Logo"> 
             </div>
         </a>
         <div class="sidebar-action"><i class="ik ik-arrow-left-circle"></i></div>
@@ -35,7 +36,7 @@
                     <a href="{{ route('admin.votes.index') }}" class="a-item" ><i class="ik ik-award"></i><span>{{ __('Vote')}}</span></a>
                 </div>  --}}
                 <div class="nav-item {{ ($segment2 == 'categories') ? 'active' : '' }}">
-                    <a href="{{ route('admin.category-types.index') }}" class="a-item" ><i class="ik ik-tag"></i><span>{{ __('Categories')}}</span></a>
+                    <a href="{{ route('admin.categories.index',$category->id) }}" class="a-item" ><i class="ik ik-tag"></i><span>{{ __('Categories')}}</span></a> 
                 </div> 
                     @if (auth()->user()->isAbleTo('view_orders') &&  getSetting('subscribers_activation') == 1 && getSetting('payout_activation') == 1)
                         <div class="nav-item {{ activeClassIfRoutes(['admin.orders.index','admin.orders.show','admin.orders.invoice','admin.user-subscriptions.index','admin.user-subscriptions.create','admin.user-subscriptions.edit', 'admin.payouts.index','admin.payouts.show','admin.orders.invoice','admin.orders.create' ], 'active open')  }} has-sub">

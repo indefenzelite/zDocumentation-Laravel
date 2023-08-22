@@ -57,7 +57,7 @@ return;
 
 Route::get('{role}/login', [LoginController::class,'loginForm'])->name('login');
 Route::post('{role}/login', [LoginController::class,'login']);
-Route::post('logout', [LoginController::class,'logout'])->name('logout');
+Route::post('/logout', [LoginController::class,'logout'])->name('logout');
 Route::post('/login-validate', [LoginController::class,'validateLoginByNumber'])->name('login-validate');
 Route::get('/otp', [LoginController::class,'otp'])->name('otp-index');
 Route::get('/auth-signup', [LoginController::class,'signup'])->name('signup');

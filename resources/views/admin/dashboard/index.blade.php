@@ -44,8 +44,7 @@
             @endforeach
         </div>
 
-        <h6 class="fw-600 mb-3">Created By Insights</h6>
-
+        {{-- <h6 class="fw-600 mb-3">Created By Insights</h6>
         <div class="row clearfix ">
             <a class="col-lg-3 col-md-6 col-sm-12" href="{{route('admin.faqs.index',['created_by' =>31])}}">
                 <div class="card ticket-card">
@@ -73,7 +72,7 @@
                     </div>
                 </div>
             </a>
-        </div>
+        </div> --}}
 
     </div>
 
