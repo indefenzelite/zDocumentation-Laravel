@@ -28,6 +28,7 @@ use Illuminate\Support\Str;
 */
 
 Route::get('/qb', function () {
+   return getVoteCountByStatus(127,1);
     return view('test');
     function calculateExclusivePrice($inclusivePrice, $taxRate) {
         // Convert the tax rate to a decimal (e.g., 10% -> 0.1)
@@ -81,6 +82,7 @@ Route::get('get-cities', [WorldController::class,'getCities'])->name('world.get-
 
 // Site Route
 Route::get('/', [HomeController::class,'index'])->name('index');
+Route::get('/search', [HomeController::class,'search'])->name('search');
 Route::get('/about', [HomeController::class,'about'])->name('about');
 Route::get('page-error', [HomeController::class,'notFound'])->name('error.index');
 Route::post('/newsletter/store', [HomeController::class,'newsletterStore'])->name('newsletter.store');

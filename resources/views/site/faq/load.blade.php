@@ -39,7 +39,7 @@
                     @endif">
                     </a>
                     <a class="ml-5 addVote" data-faq_id="{{$faq->id}}" data-status="2" href="javascript:void(0)">
-                        <img  src="{{asset('frontend/assets/emoji/angry.png')}}"
+                        <img  src="{{asset('frontend/assets/emoji/cry.png')}}"
                         alt="Anger Image" srcset="" class="emoji-icon icon-2
                         @if (getUserVote(request()->ip(),2))
                             w-40
@@ -49,10 +49,10 @@
                     </a>
                 </div>
                 <div class="">
-                    <a class="btn btn-outline-light mr-2 shareFaqBtn" href="javascript:void(0)" title="Share">
+                    <a class="btn btn-outline-light mr-2 shareFaqBtn" data-toggle="modal" data-target="#exampleModal" href="javascript:void(0)" title="Share">
                         <i class="fa-solid fa-lg fa-share-nodes text-success"></i> 
                     </a>
-                    
+                    <button type="button" class="btn btn-primary" id="popover-trigger" data-bs-toggle="popover" title="Popover Title" data-bs-content="Popover Content">Click Me</button>
                 </div>
             </div>
            

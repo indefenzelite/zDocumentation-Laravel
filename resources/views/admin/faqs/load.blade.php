@@ -22,6 +22,20 @@
                     <th>Question</th>
                     <th>Category
                     </th>
+                    <th>
+                        <img  src="{{asset('frontend/assets/emoji/happy.png')}}"
+                        alt="Sad Image" srcset="" class="emoji-icon icon-1" width="25">  
+                    </th>
+                    <th>
+                        <img  src="{{asset('frontend/assets/emoji/unhappy.png')}}"
+                        alt="Sad Image" srcset="" class="emoji-icon icon-1 " width="25">
+
+                    </th>
+                    <th>
+                        <img  src="{{asset('frontend/assets/emoji/cry.png')}}"
+                        alt="Sad Image" srcset="" class="emoji-icon icon-1"width="25">
+                    </th>
+                    
                     <th>Status</th>
                     
                 </tr>
@@ -47,6 +61,27 @@
                         <td class="text-center"> {{ $faq->getPrefix() }}</td>
                         <td>{{$faq->title }}</td>
                         <td>{{ $faq->category->name ?? '' }} > {{@$faq->subCategory->name}} > {{@$faq->subSubCategory->name}}
+                        </td>
+                        <td>
+                            @if(isset($faq->vote) && $faq->vote->status != null)
+                              {{@getVoteCountByStatus($faq->id,$faq->vote->status) ?? '--'}} 
+                            @else
+                              0
+                            @endif      
+                        </td>
+                        <td>
+                            @if(isset($faq->vote) && $faq->vote->status != null)
+                              {{@getVoteCountByStatus($faq->id,App\Models\Vote::STATUS_NEUTRAL) ?? '--'}} 
+                            @else
+                              0
+                            @endif      
+                        </td>
+                        <td>
+                            @if(isset($faq->vote) && $faq->vote->status != null)
+                              {{@getVoteCountByStatus($faq->id,App\Models\Vote::STATUS_UN_USEFUL) ?? '--'}} 
+                            @else
+                              0
+                            @endif      
                         </td>
                         <td class="is_publish-{{$faq->id}}" data-status="{{ $faq->is_publish }}">
                             @if($faq->is_publish == 1)

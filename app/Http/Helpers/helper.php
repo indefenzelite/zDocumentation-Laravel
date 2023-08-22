@@ -747,3 +747,8 @@ if (!function_exists('getUserVote')) {
         return $vote = App\Models\Vote::where('ip_address',$ip_address)->where('status',$status)->first();
     }
 }
+if (!function_exists('getVoteCountByStatus')) {
+       function getVoteCountByStatus($faq_id,$status) {
+           return $voteCount = App\Models\Vote::where('faq_id',$faq_id)->where('status',$status)->count();
+       }
+}

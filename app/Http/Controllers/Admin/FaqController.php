@@ -26,7 +26,7 @@ class FaqController extends Controller
 
     function __construct()
     {
-        $this->label = 'FAQS';
+        $this->label = 'Questions';
     }
     public function index(Request $request)
     {

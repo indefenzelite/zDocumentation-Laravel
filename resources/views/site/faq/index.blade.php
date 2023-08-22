@@ -12,6 +12,8 @@
     $meta_img = ' ';	
 	@endphp
 @endsection
+
+
 <style>
     .uk-position-fixed {
         position: fixed !important;
@@ -25,10 +27,10 @@
         color: #00a651 !important;
     }
     .emoji-icon{
-        filter: grayscale(1);
+      
         width: 30px;
     }
-    
+  
 </style>
 
 @section('content')
@@ -68,11 +70,12 @@
             </div>
             <div class="uk-width-1-1 uk-width-expand@m align-items-end" id="ajax-container" style="min-height: 450px;">
                 @include('site.faq.load')
+                
             </div>
         </div>
     </div>
+   
 </div>
-
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @push('script')
@@ -105,6 +108,17 @@
             }
         });
     })
-  </script>
+    $(document).ready(function() {
+          
+        $("html, div").animate({
+            scrollTop: $('.sidebar-docs').get(0).scrollHeight
+                }, 5);
+            });
 
+          
+     $(function () {
+        $('[data-bs-toggle="popover"]').popover();
+    });
+    
+  </script>
 @endpush

@@ -27,4 +27,8 @@ class Faq extends Model
     {
         return $this->belongsTo(Category::class,'sub_sub_category_id', 'id');
     }
+    public function vote()
+    {
+        return $this->belongsTo(Vote::class, 'id','faq_id');
+    }
 }

@@ -2,7 +2,7 @@
 
 @section('meta_data')
  @php
-	$meta_title = getSeoData('home')->title ?? ''.' | '.getSetting('app_name');
+	$meta_title = getSeoData('home')->title ? getSeoData('home')->title.' | '.getSetting('app_name') : getSetting('app_name');
     $meta_description = getSeoData('home')->description ?? '';
     $meta_keywords = getSeoData('home')->keyword ?? '';
     $meta_motto = '' ?? getSetting('site_motto');
@@ -28,7 +28,7 @@
         <h2 class="uk-h1 uk-text-center"><span class="text-success">Gbooks</span> Documentation</h2>
         <div class="hero-search">
             <div class="uk-position-relative">
-                <form action="{{route('index')}}" class="uk-search uk-search-default uk-width-1-1" name="search-hero" id="search-hero-form">
+                <form action="{{route('search')}}" class="uk-search uk-search-default uk-width-1-1" name="search-hero" id="search-hero-form">
                     <span class="uk-search-icon-flip text-success uk-icon uk-search-icon" ><svg
                             width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
                             data-svg="search-icon">
