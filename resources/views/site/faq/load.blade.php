@@ -20,33 +20,48 @@
                     </p>
                 </div>
                 <div class="emoji-format">
-                    <a class="ml-5" type="submit" href="javascript:void(0)">
+                   
+                    <a class="ml-5 addVote" data-faq_id="{{$faq->id}}" data-status="0" href="javascript:void(0)">
                         <img  src="{{asset('frontend/assets/emoji/happy.png')}}"
-                        alt="Happy Image" srcset="" class="emoji-icon" width="35" >
+                        alt="Happy Image" srcset="" class="emoji-icon icon-0 
+                        @if (getUserVote($faq->id,request()->ip(),0))
+                            w-40
+                        @else
+                            w-30   
+                        @endif">
                     </a>
-                    <a class="ml-5" type="submit" href="javascript:void(0)">
+                    <a class="ml-5 addVote" data-faq_id="{{$faq->id}}" data-status="1" href="javascript:void(0)">
                     <img  src="{{asset('frontend/assets/emoji/unhappy.png')}}"
-                    alt="Sad Image" srcset="" class="emoji-icon" width="35" >
+                    alt="Sad Image" srcset="" class="emoji-icon icon-1 
+                    @if (getUserVote($faq->id,request()->ip(),1))
+                        w-40
+                    @else
+                        w-30 
+                    @endif">
                     </a>
-                    <a class="ml-5" type="submit" href="javascript:void(0)">
-                        <img  src="{{asset('frontend/assets/emoji/angry.png')}}"
-                        alt="Anger Image" srcset="" class="emoji-icon" width="35" >
+                    <a class="ml-5 addVote" data-faq_id="{{$faq->id}}" data-status="2" href="javascript:void(0)">
+                        <img  src="{{asset('frontend/assets/emoji/cry.png')}}"
+                        alt="Anger Image" srcset="" class="emoji-icon icon-2
+                        @if (getUserVote($faq->id,request()->ip(),2))
+                            w-40
+                        @else
+                            w-30
+                        @endif" >
                     </a>
                 </div>
                 <div class="">
-                    <a class="btn btn-outline-light mr-2 shareFaqBtn" href="javascript:void(0)" title="Share">
-                        <i class="fa-solid fa-lg fa-share-nodes text-success"></i> 
-                    </a>
-                    {{-- <a class="btn btn-outline-light fw-500 mr-2 shareFeddbackBtn" href="javascript:void(0)" title="Send Feedback">
-                        <i class="fa-regular fa-share-from-square text-success"></i>
-                    </a> --}}
-                    
+                    <div id="shareFaq">
+                        
+                    </div>
+                   
                 </div>
             </div>
            
         </div>
     </article> 
-  @else
+@else
   <span class="empty-data"> No Faq Found!</span>  
 @endif
+
+
 

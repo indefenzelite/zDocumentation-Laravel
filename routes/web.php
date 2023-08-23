@@ -12,6 +12,7 @@ use App\Http\Controllers\Site\BlogController;
 use App\Http\Controllers\Site\FaqController;
 use App\Http\Controllers\Site\ContactController;
 use App\Http\Controllers\Site\SiteMapController;
+use App\Http\Controllers\Site\VoteController;
 use App\Http\Controllers\WorldController;
 use Illuminate\Support\Str;
 
@@ -27,6 +28,7 @@ use Illuminate\Support\Str;
 */
 
 Route::get('/qb', function () {
+   return getVoteCountByStatus(127,1);
     return view('test');
     function calculateExclusivePrice($inclusivePrice, $taxRate) {
         // Convert the tax rate to a decimal (e.g., 10% -> 0.1)
@@ -55,7 +57,7 @@ return;
 
 Route::get('{role}/login', [LoginController::class,'loginForm'])->name('login');
 Route::post('{role}/login', [LoginController::class,'login']);
-Route::post('logout', [LoginController::class,'logout'])->name('logout');
+Route::post('/logout', [LoginController::class,'logout'])->name('logout');
 Route::post('/login-validate', [LoginController::class,'validateLoginByNumber'])->name('login-validate');
 Route::get('/otp', [LoginController::class,'otp'])->name('otp-index');
 Route::get('/auth-signup', [LoginController::class,'signup'])->name('signup');
@@ -80,17 +82,20 @@ Route::get('get-cities', [WorldController::class,'getCities'])->name('world.get-
 
 // Site Route
 Route::get('/', [HomeController::class,'index'])->name('index');
+Route::get('/search', [HomeController::class,'search'])->name('search');
 Route::get('/about', [HomeController::class,'about'])->name('about');
 Route::get('page-error', [HomeController::class,'notFound'])->name('error.index');
 Route::post('/newsletter/store', [HomeController::class,'newsletterStore'])->name('newsletter.store');
 Route::get('/blogs', [BlogController::class,'index'])->name('blogs');
 Route::get('/blog/{slug}', [BlogController::class,'show'])->name('blog.show');
 // Route::get('/faqs', [FaqController::class,'index'])->name('faqs');
-Route::get('/sub/categories/{id}', [HomeController::class,'subCategories'])->name('sub.categories');
 Route::get('/posts', [HomeController::class,'loadOnScroll'])->name('posts');
-Route::get('/category/{c_id}/sub-category/{s_id}/faq/{id?}', [FaqController::class,'index'])->name('faqs.index');
+Route::get('/faq/{id}', [FaqController::class,'index'])->name('faqs.index');
 
 
+
+// Vote
+Route::post('/vote/store/', [VoteController::class,'store'])->name('vote.store');
 
 // Contact
 Route::get('/contact', [ContactController::class,'index'])->name('contact');

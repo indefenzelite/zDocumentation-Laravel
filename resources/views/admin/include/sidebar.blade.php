@@ -4,12 +4,13 @@
     $segment2 = request()->segment(2);
     $segment3 = request()->segment(3);
     $segment4 = request()->segment(4);
+    $category= App\Models\CategoryType::where('code','FaqCategories')->first();
 @endphp
 <div class="app-sidebar colored">
     <div class="sidebar-header">
         <a class="header-brand" href="{{route('admin.dashboard.index')}}">
             <div class="logo-img">
-               <img height="35px" src="{{ getBackendLogo(getSetting('app_logo'))}}" class="header-brand-img" title="App Logo"> 
+               <img height="30px" src="{{ getBackendLogo(getSetting('app_logo'))}}" class="header-brand-img" title="App Logo"> 
             </div>
         </a>
         <div class="sidebar-action"><i class="ik ik-arrow-left-circle"></i></div>
@@ -27,6 +28,15 @@
 
                 <div class="nav-item {{ ($segment2 == 'dashboard') ? 'active' : '' }}">
                     <a href="{{route('admin.dashboard.index')}}" class="a-item" ><i class="ik ik-bar-chart-2"></i><span>{{ __('Dashboard')}}</span></a>
+                </div> 
+                <div class="nav-item {{ ($segment2 == 'faq') ? 'active' : '' }}">
+                    <a href="{{ route('admin.faqs.index') }}" class="a-item" ><i class="ik ik-book"></i><span>{{ __('Questions')}}</span></a>
+                </div> 
+                {{-- <div class="nav-item {{ ($segment2 == 'vote') ? 'active' : '' }}">
+                    <a href="{{ route('admin.votes.index') }}" class="a-item" ><i class="ik ik-award"></i><span>{{ __('Vote')}}</span></a>
+                </div>  --}}
+                <div class="nav-item {{ ($segment2 == 'categories') ? 'active' : '' }}">
+                    <a href="{{ route('admin.categories.index',$category->id) }}" class="a-item" ><i class="ik ik-tag"></i><span>{{ __('Categories')}}</span></a> 
                 </div> 
                     @if (auth()->user()->isAbleTo('view_orders') &&  getSetting('subscribers_activation') == 1 && getSetting('payout_activation') == 1)
                         <div class="nav-item {{ activeClassIfRoutes(['admin.orders.index','admin.orders.show','admin.orders.invoice','admin.user-subscriptions.index','admin.user-subscriptions.create','admin.user-subscriptions.edit', 'admin.payouts.index','admin.payouts.show','admin.orders.invoice','admin.orders.create' ], 'active open')  }} has-sub">
@@ -63,11 +73,11 @@
                             </div>
                         @endif    
                     @endif
-                    <div class="nav-item {{ activeClassIfRoutes(['admin.mail-sms-templates.index','admin.website-pages.index','admin.faqs.index','admin.faqs.create','admin.faqs.edit','admin.mail-sms-templates.create','admin.mail-sms-templates.edit','admin.mail-sms-templates.show','admin.category-types.index','admin.category-types.create','admin.category-types.edit','admin.categories.index','admin.categories.create','admin.categories.edit', 'admin.paragraph-contents.index','admin.paragraph-contents.create','admin.paragraph-contents.edit','admin.slider-types.index','admin.slider-types.create','admin.slider-types.edit','admin.blogs.index','admin.blogs.create','admin.blogs.edit','admin.blogs.show','admin.sliders.edit','admin.sliders.index','admin.sliders.create','admin.locations.country','admin.locations.country.create','admin.locations.state','admin.locations.state.create','admin.locations.city','admin.locations.city.create','admin.subscriptions.index','admin.subscriptions.create','admin.subscriptions.edit','admin.seo-tags.index','admin.website-pages.appearance','admin.website-pages.create'], 'active open')  }} has-sub">
+                    {{-- <div class="nav-item {{ activeClassIfRoutes(['admin.mail-sms-templates.index','admin.website-pages.index','admin.faqs.index','admin.faqs.create','admin.faqs.edit','admin.mail-sms-templates.create','admin.mail-sms-templates.edit','admin.mail-sms-templates.show','admin.category-types.index','admin.category-types.create','admin.category-types.edit','admin.categories.index','admin.categories.create','admin.categories.edit', 'admin.paragraph-contents.index','admin.paragraph-contents.create','admin.paragraph-contents.edit','admin.slider-types.index','admin.slider-types.create','admin.slider-types.edit','admin.blogs.index','admin.blogs.create','admin.blogs.edit','admin.blogs.show','admin.sliders.edit','admin.sliders.index','admin.sliders.create','admin.locations.country','admin.locations.country.create','admin.locations.state','admin.locations.state.create','admin.locations.city','admin.locations.city.create','admin.subscriptions.index','admin.subscriptions.create','admin.subscriptions.edit','admin.seo-tags.index','admin.website-pages.appearance','admin.website-pages.create'], 'active open')  }} has-sub">
                         <a href="#"><i class="ik ik-hard-drive"></i><span>{{ __('Content Management')}}</span></a>
                         <div class="submenu-content">
                             @if(getSetting('faq_activation') == 1)
-                                @if(auth()->user()->isAbleTo('view_faqs'))
+                                   @if(auth()->user()->isAbleTo('view_faqs'))
                                     <a href="{{ route('admin.faqs.index') }}" class="menu-item {{ activeClassIfRoutes(['admin.faqs.index','admin.faqs.create','admin.faqs.edit',], 'active')  }}">{{ __('Questions')}}</a>
                                     @endif 
                             @endif
@@ -121,7 +131,8 @@
                             @endif
                             
                         </div>
-                        <div class="nav-item {{ activeClassIfRoutes(['admin.users.index','admin.users.show', 'admin.users.create', 'admin.user_log.index','admin.roles.index','admin.permissions.index','admin.roles.edit','admin.users.edit'], 'active open') }} has-sub">
+                    </div> --}}
+                     <div class="nav-item {{ activeClassIfRoutes(['admin.users.index','admin.users.show', 'admin.users.create', 'admin.user_log.index','admin.roles.index','admin.permissions.index','admin.roles.edit','admin.users.edit'], 'active open') }} has-sub">
                             <a href="#"><i class="ik ik-users"></i><span>{{ __('Administrator')}}</span></a>
                             <div class="submenu-content">
                                 <!-- only those have manage_user permission will get access -->
@@ -174,8 +185,7 @@
                                     </div>
                             </div>
                         @endif 
-                    </div>
-                        <div class="nav-item {{ activeClassIfRoutes(['admin.setting.index','admin.social-login','admin.website-pages.social-login','admin.general.index','admin.setting.payment','admin.mail-sms-configuration.index','admin.setting.payment','admin.setting.features-activation'], 'active open')  }} has-sub">
+                        {{-- <div class="nav-item {{ activeClassIfRoutes(['admin.setting.index','admin.social-login','admin.website-pages.social-login','admin.general.index','admin.setting.payment','admin.mail-sms-configuration.index','admin.setting.payment','admin.setting.features-activation'], 'active open')  }} has-sub">
                             <a href="#"><i class="ik ik-settings"></i><span>{{ __('Setup & Configurations')}}</span></a>
                             <div class="submenu-content">
                                 
@@ -196,17 +206,17 @@
                                     @endif
                                 @endif
                                
-                                {{-- @if(auth()->user()->isAbleTo('features_activation') && env('DEV_MODE') == 1) --}}
+                                @if(auth()->user()->isAbleTo('features_activation') && env('DEV_MODE') == 1)
                                     <a href="{{route('admin.setting.features-activation')}}" class="menu-item a-item {{ activeClassIfRoute('admin.setting.features-activation', 'active')  }}">{{ __('Features Activation')}}</a>
-                                {{-- @endif --}}
+                                @endif
                             </div>
-                        </div>
+                        </div> --}}
                 
-                @if(env('DEV_MODE') == 1)
+                {{-- @if(env('DEV_MODE') == 1)
                     <div class="nav-item {{ ($segment2 == 'crudgen') ? 'active' : '' }}">
                         <a href="{{route('crudgen.index')}}" class="a-item" ><i class="ik ik-grid"></i><span>{{ __('Crudgen')}}</span></a>
                     </div>
-                @endif 
+                @endif  --}}
                 
                  @include('admin.include.crud_sidebar')
             </nav>

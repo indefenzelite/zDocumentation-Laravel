@@ -742,3 +742,13 @@ if (!function_exists('getFaqByCreatedBy')) {
         return $faqs = App\Models\Faq::where('created_by',$user_id)->count();
     }
 }
+if (!function_exists('getUserVote')) {
+    function getUserVote($faq_id,$ip_address,$status) {
+        return $vote = App\Models\Vote::where('faq_id',$faq_id)->where('ip_address',$ip_address)->where('status',$status)->first();
+    }
+}
+if (!function_exists('getVoteCountByStatus')) {
+       function getVoteCountByStatus($faq_id,$status) {
+           return $voteCount = App\Models\Vote::where('faq_id',$faq_id)->where('status',$status)->count();
+       }
+}

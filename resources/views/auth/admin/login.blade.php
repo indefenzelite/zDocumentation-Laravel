@@ -55,7 +55,7 @@
                         <form method="POST" action="{{ route('login',$role) }}">
                             @csrf
                             <a href="{{route('index')}}">
-                                <img src="{{ getBackendLogo(getSetting('app_logo')) }}" class="avatar avatar-small mb-4 d-block mx-auto" alt="">
+                                <img src="{{ getBackendLogo(getSetting('app_logo')) }}" class=" avatar-small mb-4 d-block mx-auto" alt="" width="75%">
                             </a>
                             <h5 class="mb-3 text-center">Sign in to continue</h5>
                             @if (session('error'))

@@ -26,7 +26,11 @@ class Vote extends Model {
     use HasFactory,HasFormattedTimestamps;
     use SoftDeletes;    
     protected $guarded = ['id'];
-                  
+     
+    public const STATUS_USEFUL = 0;
+    public const STATUS_NEUTRAL = 1;
+    public const STATUS_UN_USEFUL = 2;
+
     public const BULK_ACTIVATION = 0;    
     public function getPrefix() {
         return "#V".str_replace('_1','','_'.(100000 +$this->id));

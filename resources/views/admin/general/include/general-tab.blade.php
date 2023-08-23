@@ -7,10 +7,9 @@
             <a href="javascript:void(0);" title="@lang('admin/tooltip.general_app_name')"><i
                     class="ik ik-help-circle text-muted ml-1"></i></a>
         </label>
-        <div class="col-sm-9">  pattern="[a-zA-Z]+.*" title="Please enter first letter alphabet and at least one alphabet character is required."title="Please enter first letter alphabet and at least one alphabet character is required."
+        {{-- pattern="[a-zA-Z]+.*" title="Please enter first letter alphabet and at least one alphabet character is required."title="Please enter first letter alphabet and at least one alphabet character is required." --}}
+        <div class="col-sm-9"> 
             <input type="text" pattern="[a-zA-Z]+.*"
-                title="Please enter first letter alphabet and at least one alphabet character is required."
-                title="Please enter first letter alphabet and at least one alphabet character is required."
                 name="app_name" class="form-control" placeholder="App Name" required
                 value="{{ getSetting('app_name') }}" />
         </div>

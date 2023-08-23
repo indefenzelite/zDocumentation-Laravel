@@ -26,7 +26,7 @@ class FaqController extends Controller
 
     function __construct()
     {
-        $this->label = 'FAQS';
+        $this->label = 'Questions';
     }
     public function index(Request $request)
     {
@@ -264,9 +264,9 @@ class FaqController extends Controller
             $category = Category::where('id',$request->category_id)->first();
             if ($category) {
                $categories = $category->categories;
+               $html .= "<option value='' readonly>Select Sub Category</option>";
             }
             if (count($categories) > 0) {
-                $html .= "<option value='' readonly>Select Sub Category</option>";
                 foreach ($categories as $key => $category) {
                     $html .= "<option value='".$category->id."'>".$category->name."</option>";
                 }
@@ -284,8 +284,8 @@ class FaqController extends Controller
             if ($category) {
                $categories = $category->categories;
             }
+            $html .= "<option value='' readonly>Select Sub Sub Category</option>";
             if (count($categories) > 0) {
-                $html .= "<option value='' readonly>Select Sub Sub Category</option>";
                 foreach ($categories as $key => $category) {
                     $html .= "<option value='".$category->id."'>".$category->name."</option>";
                 }

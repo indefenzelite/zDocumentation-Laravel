@@ -127,51 +127,7 @@
                                                 <input type="text" placeholder="123 456 7890" id="phone" pattern="^[0-9]*$" min="0"  name="phone" class="form-control" value="{{ $user->phone }}">
                                             </div>  
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="gender">{{ __('Gender')}}</label>
-                                                <div class="form-radio">
-                                                    <div class="radio radio-inline">
-                                                        <label>
-                                                            <input type="radio" name="gender" value="Male" @checked(old('gender',$user->gender == 'Male'))>
-                                                            <i class="helper"></i>{{ __('Male')}}
-                                                        </label>
-                                                    </div>
-                                                    <div class="radio radio-inline">
-                                                        <label>
-                                                            <input type="radio" name="gender" value="Female" @checked(old('gender',$user->gender == 'Female'))>
-                                                            <i class="helper"></i>{{ __('Female')}}
-                                                        </label>
-                                                    </div>
-                                                </div>                                        
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="dob">{{ __('DOB')}}</label>
-                                                <input class="form-control" type="date" name="dob" max="{{ now()->format('Y-m-d') }}" placeholder="Select your date" value="{{ $user->dob }}" />
-                                                <div class="help-block with-errors"></div>
-                                            </div>  
-                                        </div> 
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="pincode">{{ __('Timezone')}}</label>
-                                                <select name="timezone" class="form-control select2" id="timezone">
-                                                    @foreach ($timezones as  $timezone)
-                                                        <option value="{{ $timezone}}" @selected($timezone == $user->timezone) >{{ $timezone }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="pincode">{{ __('Bio')}}</label>
-                                                <textarea class="form-control" name="bio" id="" placeholder="Enter your bio.." cols="30" rows="2">{{ $user->bio }}</textarea>
-                                                <div class="help-block with-errors"></div>
-                                            </div>
-                                        </div>                                  
+                                                                          
                                     </div>
                                     <button type="submit" class="btn btn-success">Update</button>
                                 </form>
@@ -215,9 +171,8 @@
                                         <div class="text-center text-muted w-75 mx-auto mb-4">
                                             Set up your two factor authentication by scanning the barcode below. <br> Use <b><a href="https://safety.google/authentication/">Google Authenticator</a></b> app for continuing.
                                         </div>
-        
-                                        <button class="btn btn-success">I've Scanned QR</button>
-                                        </div>
+                        
+                                          <button class="btn btn-success">I've Scanned QR</button>
                                     </div>
                                 @else
                                     <div class="card-body text-center">

@@ -41,14 +41,43 @@ class HomeController extends Controller
                 ->orWhere('name', 'like', '%'.request()->get('search').'%');
             });
         }
-         $categories = $categories->whereHas('categoryType',function($q){
+        $categories = $categories->whereHas('categoryType',function($q){
             $q->where('code','FaqCategories');
-        })->where('level',1)->get();
+        })->where('level',1)->whereHas('categories')->get();
         $app_settings = getSetting(['app_core']);
         $contents = getParagraphContent(['home_title','home_description']);
+
+        
         return view('site.home.index', compact('metas', 'contents', 'app_settings','categories'));
     }
     
+     public function search(){
+        $faqs = Faq::query();
+        if(request()->has('search')){
+                if (request()->has('search') && request()->get('search')) {
+                    $faqs->where('title', 'like', '%'.request()->get('search').'%')
+                        ->orWhereHas(
+                            'category',
+                            function ($q) {
+                                $q->where('name', 'like', '%'.request()->get('search').'%');
+                            }
+                        );
+                }
+        }
+        else{
+            if (request()->has('query') && request()->get('query')) {
+                $faqs->where('title', 'like', '%'.request()->get('query').'%')
+                    ->orWhereHas(
+                        'category',
+                        function ($q) {
+                            $q->where('name', 'like', '%'.request()->get('query').'%');
+                        }
+                    );
+            }
+        }
+          $faqs= $faqs->latest()->get();
+         return view('site.home.search',compact('faqs'));
+     }
     public function notFound()
     {
         return view('global.error');
@@ -151,16 +180,6 @@ class HomeController extends Controller
 
             return redirect('/');
         }
-    }
-
-    public function subCategories(Request $request){
-         $category = Category::where('id',$request->id)->first();
-         $sub_categories = $category->childrenCategories;
-         if (request()->has('search') && request()->get('search')) {
-            $sub_categories->where('name', 'like', '%'.request()->get('search').'%');
-        }
-         $category_id = $request->id;
-        return  view('site.category.index',compact('sub_categories','category_id'));
     }
 
     public function loadOnScroll(Request $request)

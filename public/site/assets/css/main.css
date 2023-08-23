@@ -117,7 +117,9 @@ a:hover,
 .uk-link:hover,
 .uk-link-toggle:hover .uk-link,
 .uk-link-toggle:focus .uk-link {
-  color: #323247;
+ 
+  color: #fff;
+  /* color: #323247; */
   text-decoration: underline;
 }
 
@@ -4987,7 +4989,7 @@ ul.uk-nav-sub {
 .uk-navbar-nav > li:hover > a,
 .uk-navbar-nav > li > a:focus,
 .uk-navbar-nav > li > a.uk-open {
-  color: #D0021B;
+  color: #00a651;
   outline: none;
 }
 
@@ -12838,4 +12840,13 @@ pre.highlight {
    /* border: 1px solid #e1dada !important; */
       border-radius: 24px !important;
       padding: 20px !important; 
+}
+.faq-active>a{
+  color: #00a651 !important;
+}
+.w-30{
+  width:30px;
+}
+.w-40{
+  width:40px;
 }
