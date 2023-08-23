@@ -83,7 +83,19 @@
 @push('script')
   <script>
     var url = "{{url('/')}}";
-
+    $(document).on('click','.addVote',function(){
+        $('.emoji-icon').removeClass('w-40');
+        let faq_id = $(this).data('faq_id');
+        let status = $(this).data('status');
+        $.ajax({
+            url: "{{route('vote.store')}}",
+            type: 'POST',
+            data: { "_token": "{{ csrf_token() }}",faq_id:faq_id,status:status},
+            success: function (res) {
+                $('.icon-'+res.status_id).addClass('w-40');
+            }
+        });
+    });
     function loadFaqsData(e,faq_id,categorry_id) {
         $('.checkRequest2').removeClass('faq-active');
         $(this).addClass('faq-active');
@@ -97,19 +109,6 @@
         });
         history.pushState({}, "", url + '/faq/' + faq_id + '?category_id=' + categorry_id);
     }
-    $(document).on('click','.addVote',function(){
-        $('.emoji-icon').removeClass('w-40');
-        let faq_id = $(this).data('faq_id');
-        let status = $(this).data('status');
-        $.ajax({
-            url: url + '/vote/store/',
-            type: 'post',
-            data: { "_token": "{{ csrf_token() }}",faq_id: faq_id,status:status},
-            success: function (res) {
-                $('.icon-'+res.status_id).addClass('w-40');
-            }
-        });
-    })
     $(document).ready(function() {
         $("html, div").animate({
             scrollTop: $('.sidebar-docs').get(0).scrollHeight

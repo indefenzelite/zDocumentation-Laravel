@@ -95,7 +95,7 @@ Route::get('/faq/{id}', [FaqController::class,'index'])->name('faqs.index');
 
 
 // Vote
-Route::post('/vote/store/', [VoteController::class,'store'])->name('vote.store');
+Route::post('faq/vote/store/', [VoteController::class,'store'])->name('vote.store');
 
 // Contact
 Route::get('/contact', [ContactController::class,'index'])->name('contact');
