@@ -6,16 +6,15 @@
                 <span aria-hidden="true">×</span>
         </button></div>
         <div class="card-body">
-            <form action="{{ route('admin.users.index',['role' => request()->get('role')]) }}" method="get">
-                <input type="hidden" name="role" value="{{ request()->get('role') }}">
+            <form action="{{ route('admin.faqs.index') }}" method="get">
                 <div class="row">
                     <div class="col-12">
                         <div class="form-group mb-4">
                             <label for="">Status</label>
-                            <select class="form-control select2" name="status" id="">
-                                <option aria-readonly="true" value=""> All Status</option>
-                                @foreach($statuses as $key => $status)
-                                    <option value="{{ $key }}" @if(request()->has('status') && request()->get('status') == $key) selected @endif>{{ $status['label'] }}</option>
+                            <select name="category_id" id="" class="form-control select2">
+                                <option value="" readonly>All Category</option>
+                                @foreach (getCategoriesByCode('FaqCategories') as $category)
+                                <option value="{{$category->id}}" @if($category->id == request()->get('category_id')) selected @endif>{{$category->name}}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -32,8 +32,9 @@
                 @include('admin.include.message')
                 <!-- end message area-->
                 <div class="card ">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between">
                         <h3>Update {{ $label }}</h3>
+                        <button type="submit" class="btn btn-primary">Save & Update</button>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('admin.faqs.update', $faq->id) }}" method="post"
@@ -91,7 +92,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group ">
-                                        <label for="description" class="control-label">Description<span
+                                        <label for="description" class="control-label">Answer<span
                                                 class="text-danger">*</span></label>
                                         <div id="content-holder">
 
@@ -111,9 +112,6 @@
                                                 type="checkbox" id="is_publish" class="js-switch switch-input mb-1"
                                                 value="1"></label>
                                     </div>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <button type="submit" class="btn btn-primary">Save & Update</button>
                                 </div>
                             </div>
                         </form>

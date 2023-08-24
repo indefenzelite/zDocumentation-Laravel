@@ -77,3 +77,24 @@
      @if(getSetting('custom_footer_script') != 0)
           <script src="{!! getSetting('custom_footer_script') !!}"></script>
      @endif
+
+     <script>
+          $(document).ready(function () {
+            $('.copyLink').click(function (e) {
+                e.preventDefault();
+                var message = "Gbooks Docs \n"+$('title').text()+"\n"+$('meta[name=description]').attr('content');
+                var url = window.location.href;
+                var textToCopy = message + '\n' + url;
+                var $tempTextarea = $('<textarea>');
+                $tempTextarea.text(textToCopy);
+                $('body').append($tempTextarea);
+                $tempTextarea.select();
+                document.execCommand('copy');
+                $tempTextarea.remove();
+                $('.copyLink').html('<i class="fa-solid fa-check"></i>');
+                setTimeout(function () {
+                    $('.copyLink').html('<i class="fa-regular fa-copy"></i>');
+                }, 1000);
+            });
+        });
+     </script>

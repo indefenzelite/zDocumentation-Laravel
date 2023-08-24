@@ -82,7 +82,6 @@
     
 </div>
 @endsection
-@include('site.faq.modal.share-modal')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @push('script')
   <script>
@@ -118,18 +117,6 @@
             scrollTop: $('.sidebar-docs').get(0).scrollHeight
         }, 5);
 
-        $('#shareFaq').socialSharingPlugin({            
-            url: '',
-            title: '',
-            description: '',
-            img: $('meta[property="og:image"]').attr('content'),
-            btnClass: 'btn btn-light',
-            enable: null,
-            responsive: false,
-            mobilePosition: 'left',
-            copyMessage: 'Copy to clipboard',
-            enable: ['copy','facebook','<a href="https://www.jqueryscript.net/tags.php?/twitter/">twitter</a>','pinterest','linkedin','whatsapp']
-        });
     });
 
             

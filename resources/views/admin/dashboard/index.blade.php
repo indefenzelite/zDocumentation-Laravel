@@ -29,7 +29,7 @@
 
         <div class="row clearfix ">
             @foreach (getCategoriesByCode('FaqCategories') as $category)
-                <a class="col-lg-3 col-md-6 col-sm-12" href="#">
+                <a class="col-lg-3 col-md-6 col-sm-12" href="{{route('admin.faqs.index',['category_id' => $category->id])}}">
                     <div class="card ticket-card">
                         <div class="card-body">
                             {{-- <div class="btn btn-icon btn-light mb-30"><i

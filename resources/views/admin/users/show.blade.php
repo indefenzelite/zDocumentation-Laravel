@@ -124,22 +124,7 @@
                         <li class="nav-item">
                             <a data-active="password-tab" class="nav-link active-swicher @if(UserRole($user->id)->name == 'admin' || request()->has('active') && request()->get('active') == "password-tab" ) active @endif" id="pills-password-tab" data-toggle="pill" href="#password-tab" role="tab" aria-controls="pills-password" aria-selected="false">{{ __('Change Password')}}</a>
                         </li>
-                        <li class="nav-item">
-                            <a data-active="lead-tab" class="nav-link active-swicher @if(request()->has('active') && request()->get('active') == "lead-tab") show active @endif" id="pills-lead-tab" data-toggle="pill" href="#lead-tab" role="tab" aria-controls="pills-lead" aria-selected="false">{{ __('Notes')}}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a data-active="contact-tab" class="nav-link active-swicher @if(request()->has('active') && request()->get('active') == "contact-tab") show active @endif" id="pills-contact-tab" data-toggle="pill" href="#contact-tab" role="tab" aria-controls="pills-contact" aria-selected="false">{{ __('Contact')}}</a>
-                        </li>
-                        @if(auth()->user()->isAbleTo('view_addresses'))
-                            <li class="nav-item">
-                                <a data-active="address-tab" class="nav-link active-swicher @if(request()->has('active') && request()->get('active') == "address-tab") show active @endif" id="pills-address-tab" data-toggle="pill" href="#address-tab" role="tab" aria-controls="pills-contact" aria-selected="false">{{ __('Address')}}</a>
-                            </li>
-                        @endif
-                        @if(auth()->user()->isAbleTo('view_banks'))
-                            <li class="nav-item">
-                                <a data-active="Bank-details-tab" class="nav-link active-swicher @if(request()->has('active') && request()->get('active') == "Bank-details-tab") show active @endif" id="pills-Bank-details-tab" data-toggle="pill" href="#Bank-details-tab" role="tab" aria-controls="pills-contact" aria-selected="false">{{ __('Bank')}}</a>
-                            </li>
-                        @endif
+                      
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         @if(UserRole($user->id)->name != 'admin')
@@ -149,54 +134,6 @@
                         @endif
                         <div class="tab-pane fade @if(UserRole($user->id)->name == 'admin' || request()->has('active') && request()->get('active') == "password-tab") show active @endif" id="password-tab" role="tabadmin" aria-labelledby="pills-setting-tab">
                             @include('admin.users.includes.change-password')
-                        </div>   
-
-                        <div class="tab-pane fade @if(request()->has('active') && request()->get('active') == "lead-tab") show active @endif" id="lead-tab" role="tabadmin" aria-labelledby="pills-setting-tab">
-                            <div class="card-header p-3 d-flex justify-content-between align-items-center">
-                                <h3>{{ __('Notes') }}</h3>
-                                <a href="javacript:void(0);" class="btn btn-icon btn-sm btn-outline-primary" data-toggle="modal" data-target="#exampleModalCenter" title="Add New Note"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                            </div>
-                            <div class="card-body" style="overflow: auto">
-                                @include('admin.users.includes.notes.index')
-                            </div>
-                        </div>  
-
-                        <div class="tab-pane fade @if(request()->has('active') && request()->get('active') == "contact-tab") show active @endif" id="contact-tab" role="tabadmin" aria-labelledby="pills-setting-tab">
-                            <div class="card-header p-3 d-flex justify-content-between align-items-center">
-                                <h3>{{ __('Contact') }}</h3>
-                                <a href="javacript:void(0);" class="btn btn-icon btn-sm btn-outline-primary" data-toggle="modal" data-target="#ContactModalCenter" title="Add New Contact"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                            </div>
-                            <div class="card-body">
-                                @include('admin.users.includes.contacts.index')
-                            </div>
-                        </div>   
-
-                        <div class="tab-pane fade @if(request()->has('active') && request()->get('active') == "address-tab") show active @endif" id="address-tab" role="tabadmin" aria-labelledby="pills-setting-tab">
-                            <div class="card-header p-3 d-flex justify-content-between align-items-center">
-                                <h3>{{ __('Address') }}</h3>   
-                                @if(auth()->user()->isAbleTo('add_address'))
-                                    <a href="javacript:void(0);" class="btn btn-icon btn-sm btn-outline-primary" data-toggle="modal" data-target="#addressModalCenter" title="Add New Address"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                                @endif    
-                            </div>
-                            @if(auth()->user()->isAbleTo('control_address'))
-                                <div class="card-body">
-                                    @include('admin.users.includes.addresses.index')
-                                </div>
-                            @endif
-                        </div>  
-
-                        <div class="tab-pane fade @if(request()->has('active') && request()->get('active') == "Bank-details-tab") show active @endif" id="Bank-details-tab" role="tabadmin" aria-labelledby="pills-setting-tab">
-                            <div class="card-header p-3 d-flex justify-content-between align-items-center">
-                                <h3>{{ __('Bank Details') }}</h3>
-                                @if(auth()->user()->isAbleTo('add_bank'))
-                                    <a href="javacript:void(0);" class="btn btn-icon btn-sm btn-outline-primary addPayoutDetailBtn" data-toggle="modal" data-target="#BankDetailsModalCenter" title="Add New Bank Detail"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                                @endif
-                            </div>
-                            @if(auth()->user()->isAbleTo('control_bank'))
-                                <div class="card-body">
-                                    @include('admin.users.includes.bank-details.index')
-                                </div>
-                            @endif
                         </div>   
                     </div>
                 </div>

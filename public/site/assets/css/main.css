@@ -12850,3 +12850,45 @@ pre.highlight {
 .w-40{
   width:40px;
 }
+
+.faq-footer{
+  display: flex;
+  justify-content: space-between;
+}
+.share-faq{
+  display: flex;
+  justify-content: space-between;
+}
+
+.area-head-title{
+  line-height: 2 !important ;
+}
+@media (max-width: 959px) {
+  .faq-footer{
+    display: block;
+  }
+  .faq-meta{
+    display: none;
+  }
+  .emoji-format{
+    margin: 0 auto;
+    text-align: center;
+  }
+  .share-faq{
+    margin: 0 auto;
+    padding-top: 10px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    display: block;
+  }
+  .area-head-title {
+    line-height: 1.5 !important;
+  }
+  .question {
+    line-height: 1.2 !important;
+  }
+  .uk-background-default  {
+    right: 89px !important;
+    top: 15px !important;
+  }
+}

@@ -16,7 +16,6 @@
                                 <th class="col_3">{{ __('Role')}}</th>
                                 <th class="col_4">{{ __('Email')}}</th>
                                 <th class="col_4">{{ __('Phone')}}</th>
-                                <th class="col_5">{{ __('Balance')}}</th>
                                 <th class="col_6">{{ __('Status')}}</th>
                                 <th class="col_7">{{ __('Join At')}}</th>
                             </tr>
@@ -25,13 +24,12 @@
                             @if(count($users) > 0)
                                 @foreach ($users as $user)
                                 <tr>
-                                    <td class="col_1">{{ $loop->iteration}}</td>
-                                    <td class="col_2">{{ $user->full_name}}</td>
-                                    <td class="col_3">{{$user->role_name}}</td>
-                                    <td class="col_4">{{ $user->email }}</td>
-                                    <td class="col_4">{{ $user->phone }}</td>
-                                    <td class="col_5">{{ format_price($user->wallet) }}</td>
-                                    <td class="col_6">{{ $user->status_parsed->label}}</td>
+                                    <td class="col_1">{{ $loop->iteration ??'--'}}</td>
+                                    <td class="col_2">{{ $user->full_name ??'--'}}</td>
+                                    <td class="col_3">{{$user->role_name ??'--'}}</td>
+                                    <td class="col_4">{{ $user->email ??'--'}}</td>
+                                    <td class="col_4">{{ $user->phone ??'--'}}</td>
+                                    <td class="col_6">{{ $user->status_parsed->label ??'--'}}</td>
                                     <td class="col_7">{{ ($user->created_at) }}</td>
                                 </tr>
                                 @endforeach

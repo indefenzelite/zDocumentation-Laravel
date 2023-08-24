@@ -119,15 +119,7 @@
                         <h3>{{$label}}</h3>
                         <div class="d-flex">
                             <form action="" method="get" class="TableForm d-flex">
-                                <div class="mr-2">
-                                    <select name="category_id" id="" class="form-control select2">
-                                        <option value="" readonly>Select Category</option>
-                                        @foreach (getCategoriesByCode('FaqCategories') as $category)
-                                        <option value="{{$category->id}}" @if($category->id == request()->get('category_id')) selected @endif>{{$category->name}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-icon btn-sm btn-outline-warning mr-2" title="Filter"><i class="fa fa-filter" aria-hidden="true"></i></button>
+                                <button type="button" class="off-canvas btn btn-outline-secondary btn-icon mr-2"><i class="fa fa-filter"></i></button>
                                 <a href="{{route('admin.faqs.index')}}" class="btn btn-icon btn-sm btn-outline-danger mr-2" title="Reset"><i class="fa fa-redo" aria-hidden="true"></i></a>
                                 <a href="javascript:void(0);" id="addFaqs" class="btn btn-icon btn-sm btn-outline-primary mr-2" title="Add New Faq"><i class="fa fa-plus" aria-hidden="true"></i></a>
                             </form>
@@ -172,6 +164,7 @@
             </div>
         </div>
     </div>
+    @include('admin.faqs.filter')
 @endsection
     <!-- push external js -->
     @push('script')
