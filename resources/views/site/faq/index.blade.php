@@ -1,3 +1,7 @@
+
+@php
+    $headerSearch = true;
+@endphp
 @extends('layouts.app')
 @section('meta_data')
     @php

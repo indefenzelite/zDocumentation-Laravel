@@ -47,7 +47,7 @@
                                 <input type="hidden" name="request_with" value="create">
                                 <input type="hidden" name="created_by" value="{{auth()->id()}}">
                                 <div class="row">
-                                    <div class="col-md-4">   
+                                    <div class="col-md-6">   
                                         <div class="form-group ">
                                             <div class="form-group {{ $errors->has('category_id') ? 'has-error' : ''}}">
                                                 <label for="category_id">{{ __('Category')}} <span class="text-danger">*</span> </label>
@@ -61,7 +61,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">   
+                                    <div class="col-md-6">   
                                         <div class="form-group ">
                                             <div class="form-group {{ $errors->has('sub_category_id') ? 'has-error' : ''}}">
                                                 <label for="sub_category_id">{{ __('Sub Category')}} </label>
@@ -71,7 +71,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">   
+                                    {{-- <div class="col-md-4">   
                                         <div class="form-group ">
                                             <div class="form-group {{ $errors->has('sub_sub_category_id') ? 'has-error' : ''}}">
                                                 <label for="sub_sub_category_id">{{ __('Sub Sub Category')}} </label>
@@ -80,7 +80,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-12">                                         
                                         <div class="form-group">
                                             <label for="title" class="control-label">Question <span class="text-danger">*</span></label>

@@ -25,11 +25,8 @@
                   </a>
                      <ul class="uk-navbar-nav uk-visible@m" id="nav_link">
                     <li class="uk-active"><a href="{{url('/')}}">Home</a></li>
-                    
-                    <li class=" 
-                      
-                      ">
-                    </li>
+                    <li class="uk"><a href="https://gbooks.io/">Accounting</a></li>
+
                   </ul>
                 
                 
@@ -39,14 +36,17 @@
                   </a>
                 </div>
                 <div class="uk-navbar-right">
-                  <div>
-                    <a id="search-navbar-toggle" type="submit" class="uk-navbar-toggle searchBtn text-success uk-icon uk-search-icon" data-uk-search-icon="" href="#" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="search-icon"><circle fill="none" stroke="#000" stroke-width="1.1" cx="9" cy="9" r="7"></circle><path fill="none" stroke="#000" stroke-width="1.1" d="M14,14 L18,18 L14,14 Z"></path></svg></a>
-                    <div class="uk-background-default uk-border-rounded @if(request()->get('query')) uk-open @else uk-drop @endif" data-uk-drop="mode: click; pos: left-center; offset: 0">
-                      <form action="{{route('search')}}" class="uk-search uk-search-navbar uk-width-1-1" method="GET">
-                        <input id="search-navbar" class="uk-search-input" type="search" placeholder="Search for question..." name="query"  autofocus="" autocomplete="off" data-minchars="1" data-maxitems="30" value="{{request()->get('searchBar')}}">
-                      </form>
+                @if(isset($headerSearch))
+                    <div>
+                      <a id="search-navbar-toggle" type="submit" class="uk-navbar-toggle searchBtn text-success uk-icon uk-search-icon" data-uk-search-icon="" href="#" aria-expanded="false"><svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" data-svg="search-icon"><circle fill="none" stroke="#000" stroke-width="1.1" cx="9" cy="9" r="7"></circle><path fill="none" stroke="#000" stroke-width="1.1" d="M14,14 L18,18 L14,14 Z"></path></svg></a>
+                      <div class="uk-background-default uk-border-rounded @if(request()->get('search')) uk-open @else uk-drop @endif" data-uk-drop="mode: click; pos: left-center; offset: 0">
+                        <form action="{{route('search')}}" class="uk-search uk-search-navbar uk-width-1-1" method="GET">
+                          <input id="search-navbar" class="uk-search-input" type="search" placeholder="Search for question..." name="search"  autofocus="" autocomplete="off" data-minchars="1" data-maxitems="30" value="{{request()->get('search')}}">
+                        </form>
+                      </div>
                     </div>
-                  </div>
+                  
+                @endif
                   <ul class="uk-navbar-nav uk-visible@m">
                     <li>
                       <div class="uk-navbar-item " style="position: relative">

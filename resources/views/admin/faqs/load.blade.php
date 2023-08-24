@@ -60,7 +60,8 @@
                         </td>
                         <td class="text-center"> {{ $faq->getPrefix() }}</td>
                         <td>{{$faq->title }}</td>
-                        <td>{{ $faq->category->name ?? '' }} > {{@$faq->subCategory->name}} > {{@$faq->subSubCategory->name}}
+                        <td>{{ $faq->category->name ?? '' }} > {{@$faq->subCategory->name}} 
+                            {{-- > {{@$faq->subSubCategory->name}} --}}
                         </td>
                         <td>
                             @if(isset($faq->vote) && $faq->vote->status != null)

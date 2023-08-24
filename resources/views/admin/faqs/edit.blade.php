@@ -41,7 +41,7 @@
                             @csrf
                             <input type="hidden" name="request_with" value="update">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
                                         <label for="category_id">{{ __('Category') }} <span class="text-danger">*</span>
                                         </label>
@@ -58,7 +58,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class="form-group {{ $errors->has('sub_category_id') ? 'has-error' : '' }}">
                                         <label for="sub_category_id">{{ __('Sub Category') }} </label>
                                         <a href="javascript:void(0);" title="@lang('admin/tooltip.edit_faq_category')"><i
@@ -66,13 +66,13 @@
                                         <select name="sub_category_id" id="sub_category_id" class="form-control select2">
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-4">   
+                                </div> --}}
+                                <div class="col-md-6">   
                                     <div class="form-group ">
                                         <div class="form-group {{ $errors->has('sub_sub_category_id') ? 'has-error' : ''}}">
                                             <label for="sub_sub_category_id">{{ __('Sub Sub Category')}} </label>
                                             <a href="javascript:void(0);" title="@lang('admin/tooltip.add_faq_category')"><i class="ik ik-help-circle text-muted ml-1"></i></a>
-                                            <select name="sub_sub_category_id" id="sub_sub_category_id" class="form-control select2">
+                                            <select name="sub_sub_category_id" id="admin/faqs" class="form-control select2">
                                             </select>
                                         </div>
                                     </div>

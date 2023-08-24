@@ -29,14 +29,22 @@
 
         <div class="row clearfix ">
             @foreach (getCategoriesByCode('FaqCategories') as $category)
-                <a class="col-lg-2 col-md-6 col-sm-12" href="#">
+                <a class="col-lg-3 col-md-6 col-sm-12" href="#">
                     <div class="card ticket-card">
                         <div class="card-body">
                             {{-- <div class="btn btn-icon btn-light mb-30"><i
                                     class="fas text-muted fa-lg fa-hand-holding-dollar"></i></div> --}}
                             <div class="text-left">
-                                <h2 class="mb-0 d-inline-block text-primary">{{$category->categories->count()}}</h2><br>
-                                <p class="mb-0 d-inline-block">{{$category->name}}</p>
+                                <h2 class="mb-0 d-inline-block text-primary">
+                                    {{$category->faqs->count()}} 
+                                </h2>
+                                <span class="text-muted">
+                                    Q's ({{$category->categories->count()}})
+                                </span>
+                                <br>
+                                <h6 class="mb-0 d-inline-block">
+                                    {{$category->name}}
+                                </h6>
                             </div>
                         </div>
                     </div>

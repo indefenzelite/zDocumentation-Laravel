@@ -1,5 +1,5 @@
 @php
-    $roles = App\Models\Role::pluck('display_name');
+    $roles = App\Models\Role::whereNotIn('id', [2])->pluck('display_name');
     $segment1 = request()->segment(1);
     $segment2 = request()->segment(2);
     $segment3 = request()->segment(3);
