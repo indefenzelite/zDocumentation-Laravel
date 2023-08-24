@@ -104,7 +104,7 @@
                                     <a href="{{route('password.forget')}}" class="text-danger small fw-normal">Forgot password ?</a><p> --}}
                             </div>
             
-                            <button class="btn btn-primary w-100" type="submit">Secure Sign-In</button>
+                            <button class="btn btn-success w-100" type="submit">Secure Sign-In</button>
 
                             {{-- <div class="col-12 text-center mt-3">
                                 <a href="{{ route('register',$role) }}" class="text-dark">Don't have an account?</a>
