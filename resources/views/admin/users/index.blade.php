@@ -4,11 +4,7 @@
     <!-- push external head elements to head -->
     @push('head')
         <link rel="stylesheet" href="{{ asset('admin/plugins/select2/dist/css/select2.min.css') }}">
-        <style>
-            .select2-selection.select2-selection--single {
-                width: 175px !important;
-            }
-        </style>
+        
     @endpush
 
     <div class="container-fluid">

@@ -1,3 +1,7 @@
+
+@php
+    $headerSearch = true;
+@endphp
 @extends('layouts.app')
 @section('meta_data')
     @php
@@ -78,12 +82,23 @@
     
 </div>
 @endsection
-@include('site.faq.modal.share-modal')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @push('script')
   <script>
     var url = "{{url('/')}}";
-
+    $(document).on('click','.addVote',function(){
+        $('.emoji-icon').removeClass('w-40');
+        let faq_id = $(this).data('faq_id');
+        let status = $(this).data('status');
+        $.ajax({
+            url: "{{route('vote.store')}}",
+            type: 'POST',
+            data: { "_token": "{{ csrf_token() }}",faq_id:faq_id,status:status},
+            success: function (res) {
+                $('.icon-'+res.status_id).addClass('w-40');
+            }
+        });
+    });
     function loadFaqsData(e,faq_id,categorry_id) {
         $('.checkRequest2').removeClass('faq-active');
         $(this).addClass('faq-active');
@@ -97,36 +112,11 @@
         });
         history.pushState({}, "", url + '/faq/' + faq_id + '?category_id=' + categorry_id);
     }
-    $(document).on('click','.addVote',function(){
-        $('.emoji-icon').removeClass('w-40');
-        let faq_id = $(this).data('faq_id');
-        let status = $(this).data('status');
-        $.ajax({
-            url: url + '/vote/store/',
-            type: 'post',
-            data: { "_token": "{{ csrf_token() }}",faq_id: faq_id,status:status},
-            success: function (res) {
-                $('.icon-'+res.status_id).addClass('w-40');
-            }
-        });
-    })
     $(document).ready(function() {
         $("html, div").animate({
             scrollTop: $('.sidebar-docs').get(0).scrollHeight
         }, 5);
 
-        $('#shareFaq').socialSharingPlugin({            
-            url: '',
-            title: '',
-            description: '',
-            img: $('meta[property="og:image"]').attr('content'),
-            btnClass: 'btn btn-light',
-            enable: null,
-            responsive: false,
-            mobilePosition: 'left',
-            copyMessage: 'Copy to clipboard',
-            enable: ['copy','facebook','<a href="https://www.jqueryscript.net/tags.php?/twitter/">twitter</a>','pinterest','linkedin','whatsapp']
-        });
     });
 
             

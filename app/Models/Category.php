@@ -55,4 +55,8 @@ class Category extends Model
     {
         return $this->hasOne(Category::class,'parent_id','id')->latest();
     }
+    public function faqs()
+    {
+        return $this->hasMany(Faq::class,'category_id');
+    }
 }

@@ -48,14 +48,14 @@
             </div>
         </div>
         <form class="forms-sample ajaxForm" method="POST" action="{{ route('admin.users.update',$user->id) }}" >
-        <div class="row">
+         <div class="row">
             <!-- start message area-->
             @include('admin.include.message')
             <!-- end message area-->
             @csrf
                 <input type="hidden" name="id" value="{{$user->id}}">
                 <input type="hidden" name="request_with" value="update">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header d-flex justify-content-between">
                             <h3>{{ __('Personal Details')}}</h3>
@@ -178,14 +178,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                {{-- <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
                             <h3>Verification</h3>
                         </div>
                         <div class="card-body">
-                            {{-- <div class="fw-700 alert alert-info mb-2">This form does not need to be filled out if you do not wish to change your password.</div> --}}
-                            {{-- <div class="row">
+                            <div class="fw-700 alert alert-info mb-2">This form does not need to be filled out if you do not wish to change your password.</div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="password">{{ __('Password')}}</label>
@@ -208,7 +208,7 @@
                                         <div class="help-block with-errors"></div>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="">
                                 @php
                                     $kyc_record = null;
@@ -217,7 +217,7 @@
                                     }
                                 @endphp
                                 <div class="card-body">
-                                    {{-- Status --}}
+                                    
                                     @if(isset($user_kyc) && $user_kyc->status == 0)
                                        <div class="alert alert-info">
                                            <i class="ik ik-alert-triangle"></i> Verification request isn't submitted yet!
@@ -302,8 +302,8 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div> --}}
+        </div>
         </form>
     </div>
     <!-- push external js -->

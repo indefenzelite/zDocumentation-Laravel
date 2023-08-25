@@ -32,8 +32,9 @@
                 @include('admin.include.message')
                 <!-- end message area-->
                 <div class="card ">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between">
                         <h3>Update {{ $label }}</h3>
+                        <button type="submit" class="btn btn-primary">Save & Update</button>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('admin.faqs.update', $faq->id) }}" method="post"
@@ -41,7 +42,7 @@
                             @csrf
                             <input type="hidden" name="request_with" value="update">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="form-group {{ $errors->has('category_id') ? 'has-error' : '' }}">
                                         <label for="category_id">{{ __('Category') }} <span class="text-danger">*</span>
                                         </label>
@@ -58,7 +59,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                {{-- <div class="col-md-4">
                                     <div class="form-group {{ $errors->has('sub_category_id') ? 'has-error' : '' }}">
                                         <label for="sub_category_id">{{ __('Sub Category') }} </label>
                                         <a href="javascript:void(0);" title="@lang('admin/tooltip.edit_faq_category')"><i
@@ -66,13 +67,13 @@
                                         <select name="sub_category_id" id="sub_category_id" class="form-control select2">
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-4">   
+                                </div> --}}
+                                <div class="col-md-6">   
                                     <div class="form-group ">
                                         <div class="form-group {{ $errors->has('sub_sub_category_id') ? 'has-error' : ''}}">
                                             <label for="sub_sub_category_id">{{ __('Sub Sub Category')}} </label>
                                             <a href="javascript:void(0);" title="@lang('admin/tooltip.add_faq_category')"><i class="ik ik-help-circle text-muted ml-1"></i></a>
-                                            <select name="sub_sub_category_id" id="sub_sub_category_id" class="form-control select2">
+                                            <select name="sub_sub_category_id" id="admin/faqs" class="form-control select2">
                                             </select>
                                         </div>
                                     </div>
@@ -91,7 +92,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class="form-group ">
-                                        <label for="description" class="control-label">Description<span
+                                        <label for="description" class="control-label">Answer<span
                                                 class="text-danger">*</span></label>
                                         <div id="content-holder">
 
@@ -111,9 +112,6 @@
                                                 type="checkbox" id="is_publish" class="js-switch switch-input mb-1"
                                                 value="1"></label>
                                     </div>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <button type="submit" class="btn btn-primary">Save & Update</button>
                                 </div>
                             </div>
                         </form>

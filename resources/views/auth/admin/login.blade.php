@@ -55,7 +55,7 @@
                         <form method="POST" action="{{ route('login',$role) }}">
                             @csrf
                             <a href="{{route('index')}}">
-                                <img src="{{ getBackendLogo(getSetting('app_logo')) }}" class=" avatar-small mb-4 d-block mx-auto" alt="" width="75%">
+                                <img src="{{ getBackendLogo(getSetting('app_logo')) }}" class=" mt-2 avatar-small  d-block mx-auto" alt="" width="50%">
                             </a>
                             <h5 class="mb-3 text-center">Sign in to continue</h5>
                             @if (session('error'))
@@ -86,7 +86,7 @@
                             <div class="form-floating mb-3">
                                 <input type="password" class="form-control @error('password') is-invalid @enderror" id="password-field" placeholder="Password" name="password" required>
                                 <label for="password-field">Password</label>
-                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                                <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password text-success"></span>
                                 @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -100,15 +100,15 @@
                                         <label class="form-check-label fw-normal" for="flexCheckDefault">Remember me</label>
                                     </div>
                                 </div>
-                                <p class="forgot-pass mb-0">
-                                    <a href="{{route('password.forget')}}" class="text-danger small fw-normal">Forgot password ?</a></p>
+                                {{-- <p class="forgot-pass mb-0">
+                                    <a href="{{route('password.forget')}}" class="text-danger small fw-normal">Forgot password ?</a><p> --}}
                             </div>
             
-                            <button class="btn btn-primary w-100" type="submit">Secure Sign-In</button>
+                            <button class="btn btn-success w-100" type="submit">Secure Sign-In</button>
 
-                            <div class="col-12 text-center mt-3">
+                            {{-- <div class="col-12 text-center mt-3">
                                 <a href="{{ route('register',$role) }}" class="text-dark">Don't have an account?</a>
-                            </div><!--end col-->
+                            </div><!--end col--> --}}
 
                             <p class="mb-0 text-muted mt-5 text-center">© <script>document.write(new Date().getFullYear())</script> {{ getSetting('app_name') }}</p>
                         </form>

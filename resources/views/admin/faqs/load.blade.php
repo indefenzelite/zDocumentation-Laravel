@@ -60,7 +60,8 @@
                         </td>
                         <td class="text-center"> {{ $faq->getPrefix() }}</td>
                         <td>{{$faq->title }}</td>
-                        <td>{{ $faq->category->name ?? '' }} > {{@$faq->subCategory->name}} > {{@$faq->subSubCategory->name}}
+                        <td>{{ $faq->category->name ?? '' }} > {{@$faq->subCategory->name}} 
+                            {{-- > {{@$faq->subSubCategory->name}} --}}
                         </td>
                         <td>
                             @if(isset($faq->vote) && $faq->vote->status != null)
@@ -96,14 +97,14 @@
         </table>
     </div>
 </div>
-<div class="card-footer d-flex justify-content-between">
-    <div class="pagination">
+<div class="card-footer d-lg-flex justify-content-between">
+    <div class="pagination ">
         {{ $faqs->appends(request()->except('page'))->links() }}
     </div>
-    <div>
+    <div class="py-3">
         @if($faqs->lastPage() > 1)
-            <label class="d-flex justify-content-end" for="">
-                <div class="mr-2 pt-2">
+            <label class="d-lg-flex justify-content-end"  for="">
+                <div class="mr-2 pt-lg-2 mb-1">
                     Jump To: 
                 </div>
                 <input type="number" class="w-50 form-control" id="jumpTo"  name="page" value="{{ $faqs->currentPage() ?? ''}}">

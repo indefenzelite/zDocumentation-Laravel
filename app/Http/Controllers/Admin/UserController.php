@@ -89,7 +89,7 @@ class UserController extends Controller
     {
         try {
             $statuses = User::STATUSES;
-            $roles = Role::get();
+            $roles = Role::whereNotIn('id', [2])->get();
             $label = Str::singular($this->label);
             return view('admin.users.create', compact('roles', 'statuses', 'label'));
         } catch (\Exception $e) {
