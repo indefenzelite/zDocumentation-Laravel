@@ -98,3 +98,22 @@
             });
         });
      </script>
+     {{-- Goggle Translet --}}
+  <script type="text/javascript"> 
+     function googleTranslateElementInit() {
+ 
+       new google.translate.TranslateElement(
+       {
+           pageLanguage: "en",
+           includedLanguages: "",
+       },
+       "google_translate_element"
+       );
+       }
+ 
+       setTimeout( function() {
+       googleTranslateElementInit();
+       }, 500);
+ 
+   </script>
+   <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

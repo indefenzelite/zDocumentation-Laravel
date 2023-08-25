@@ -4750,7 +4750,7 @@ ul.uk-nav-sub {
  * Items
  */
 .uk-nav-primary > li > a {
-  font-size: 1.375rem;
+  font-size: 1rem;
   line-height: 1.5;
   color: #8f919e;
 }
@@ -12891,4 +12891,13 @@ pre.highlight {
     right: 89px !important;
     top: 15px !important;
   }
+  .uk-navbar .uk-search-navbar .uk-search-input {
+   
+    padding-left: 5.1875rem !important;
+  }
+}
+
+.goog-te-combo{
+  
+  border: none !important;
 }

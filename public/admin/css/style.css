@@ -689,10 +689,13 @@
   .table-controller input{
     margin-top: 5px;
   }
+  .div.slide-slide{
+    top: 69px !important;
+  }
 }
 div.side-slide {
   background-color: #fff;
-  top: 55px;
+  top: 69px;
   right: -100%; 
   height: 90%;
   position: fixed;
@@ -724,6 +727,6 @@ div.side-slide {
   color:#f5365c ;
 }
 .text-filter {
-  color: #646897 !important;
+  color: #212529  !important;
 }
 
