@@ -12901,3 +12901,6 @@ pre.highlight {
   
   border: none !important;
 }
+.skiptranslate iframe{
+  visibility: hidden !important;
+}
