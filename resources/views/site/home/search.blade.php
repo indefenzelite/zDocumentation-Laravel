@@ -49,10 +49,12 @@
     <div class="uk-container">
         <div class="row" id="post">
             <div class="col-md-6 mx-auto">
-                 <small class="text-muted mb-2">{{$faqs->count()}} Results Found</small>
-                 <br>
+                @if ($faqs->count() != 0)
+                    <small class="text-muted mb-2">{{$faqs->count()}} Results Found</small>
+                    <br>
+                @endif
                 <div class="uk-card p-0">
-                    <ul class="list-unstyled mt-0">
+                    <ul class="list-unstyled mt-0 ">
                         @forelse($faqs as  $faq)
                         <li>
                             <ul class="list-unstyled" style="text-align:left;">
@@ -65,8 +67,8 @@
                             
                             </ul>
                         </li>
-                            @empty
-                            <span class="text-center text-success">No Data Found!</span>
+                         @empty
+                           <li><span class="text-center text-success d-flex justify-content-center">No Data Found!</span></li> 
                         @endforelse
                     </ul>
                 </div>

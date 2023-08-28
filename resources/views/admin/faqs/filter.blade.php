@@ -11,7 +11,7 @@
                     <div class="col-12">
                         <div class="form-group mb-4">
                             <label for="">Status</label>
-                            <select name="category_id" id="" class="form-control select2">
+                            <select name="category_id" id="" class="form-control ">
                                 <option value="" readonly>All Category</option>
                                 @foreach (getCategoriesByCode('FaqCategories') as $category)
                                 <option value="{{$category->id}}" @if($category->id == request()->get('category_id')) selected @endif>{{$category->name}}</option>

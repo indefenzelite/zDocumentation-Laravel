@@ -9,6 +9,11 @@
     <!-- push external head elements to head -->
     @push('head')
     <link rel="stylesheet" href="{{ asset('admin/plugins/mohithg-switchery/dist/switchery.min.css') }}">
+    <style>
+        .select2 select2-container select2-container--default select2-container--focus{
+            width: auto !important;
+        }
+    </style>
     @endpush
 
     <div class="container-fluid">

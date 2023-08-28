@@ -11,8 +11,10 @@
                     entries
                 </label>
             </div>
-            
-            <input type="text" name="search" class="form-control" placeholder="Search" id="search" value="{{ request()->get('search') }}" style="width:unset;">
+            <div >
+                <input type="text" name="search" class="form-control" placeholder="Search" id="search" value="{{ request()->get('search') }}" style="width:unset;">
+
+            </div>
         </div>
         <div class="table-responsive">
             <div class="table-responsive">
@@ -65,13 +67,13 @@
             </div>
         </div>
     </div>
-    <div class="card-footer d-flex justify-content-between">
+    <div class="card-footer d-lg-flex justify-content-between">
         <div class="pagination">
             {{ $categories->appends(request()->except('page'))->links() }}
         </div>
-        <div>
+        <div class="py-3">
             @if($categories->lastPage() > 1)
-                <label class="d-flex justify-content-end" for="">
+                <label class="d-lg-flex justify-content-end" for="">
                     <div class="mr-2 pt-2">
                         Jump To: 
                     </div>
