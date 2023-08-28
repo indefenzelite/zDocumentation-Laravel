@@ -53,15 +53,15 @@
                         @endif
                       </div>
                     </li>
-                    <li class="mt-4">
-                      <button type="button" class="btn btn-light translateModal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <li class="">
+                      <a  class="translateModal" data-bs-toggle="modal" data-bs-target="#exampleModal">
                         <img src="{{asset('site/assets/img/google.png')}}" alt="" width="15px">
-                    </button>
+                    </a>
                    </li>
                   </ul>
-                  <button type="button" class="btn btn-light translateModal  uk-hidden@m" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <a  class=" translateModal  uk-hidden@m" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     <img src="{{asset('site/assets/img/google.png')}}" alt="" width="15px">
-                  </button>
+                  </a>
                   <a class="uk-navbar-toggle uk-hidden@m" href="#offcanvas" data-uk-toggle><span
                     data-uk-navbar-toggle-icon></span> <span class="uk-margin-small-left">Menu</span></a>
                     

@@ -48,17 +48,19 @@
 <div class="uk-section" style="padding-top:20px;">
     <div class="uk-container">
         <div class="row" id="post">
-            <div class="col-md-6 mx-auto">
-                @if ($faqs->count() != 0)
-                    <small class="text-muted mb-2">{{$faqs->count()}} Results Found</small>
-                    <br>
-                @endif
-                <div class="uk-card p-0">
-                    <ul class="list-unstyled mt-0 ">
+            <div class="col-md-6 mx-auto d-flex justify-content-center">
+                <div class="uk-card ">
+                    <div class="uk-card-header">
+                        @if ($faqs->count() != 0)
+                        <small class="text-muted ">{{$faqs->count()}} Results Found</small>
+                        <br>
+                       @endif 
+                    </div>
+                    <ul class="list-unstyled mt-0  ">
                         @forelse($faqs as  $faq)
                         <li>
                             <ul class="list-unstyled" style="text-align:left;">
-                                
+
                                     <a href="{{route('faqs.index',[$faq->id,'category_id' => $faq->category_id]) }}">
                                         <li>
                                             <span class="text-success fw-600 mb-1">{{$faq->title}}</span>
@@ -68,7 +70,7 @@
                             </ul>
                         </li>
                          @empty
-                           <li><span class="text-center text-success d-flex justify-content-center">No Data Found!</span></li> 
+                           <li><span class="text-center text-success ">No Data Found!</span></li> 
                         @endforelse
                     </ul>
                 </div>

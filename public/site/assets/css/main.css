@@ -12897,10 +12897,11 @@ pre.highlight {
   }
 }
 
-.goog-te-combo{
+/* .goog-te-combo{
   
   border: none !important;
-}
+} */
 .skiptranslate iframe{
   visibility: hidden !important;
 }
+ .mb-50 { margin-bottom: 50px !important; }

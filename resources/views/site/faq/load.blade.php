@@ -13,11 +13,13 @@
                 <hr class="hr-dark">
             <div class="faq-footer">
 
-                <div class="mb-4 faq-meta">
-                    <span class="f-14 text-muted">{{$faq->getPrefix()}}</span>
+                <div class="mb-4 faq-meta"> 
                     <p class="m-0 p-0 ml-2 f-14" title="Last Updated At">
-                       {{\Carbon\Carbon::parse($faq->updated_at)->format('d-m-Y:H:i')}}
+                        {{$faq->formatted_updated_at}}
+                     
+                       {{-- {{\Carbon\Carbon::parse($faq->updated_at)->format('d-m-Y:H:i')}} --}}
                     </p>
+                    <span class="f-14 text-muted">{{$faq->getPrefix()}}</span>
                 </div>
                 <div class="emoji-format">
                    
