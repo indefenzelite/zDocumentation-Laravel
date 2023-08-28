@@ -35,7 +35,7 @@ class VoteController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         if ($request->faq_id == null) {
             return response()->json([
                     'status'=>'error',

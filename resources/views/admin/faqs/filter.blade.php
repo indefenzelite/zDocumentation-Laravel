@@ -1,6 +1,6 @@
 <div class="side-slide" style="right: -100%;">
     <div class="filter">
-        <div class="card-header d-flex justify-content-between" style="background-color: #e1e5f3">
+        <div class="card-header d-flex justify-content-between" style="background-color: #efefef">
             <h5 class="text-filter mt-2">Filter</h5>
             <button type="button" class="close off-canvas text-filter" data-type="close">
                 <span aria-hidden="true">×</span>
@@ -20,7 +20,7 @@
                         </div>
                     </div> 
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary" style="background-color: #1a237e; border: 1px solid #1a237e;">Apply Filter</button>
+                        <button type="submit" class="btn btn-primary" style="background-color: #06bf61; border: 1px solid #06bf61;">Apply Filter</button>
                         <a href="<?php $_SERVER['PHP_SELF']; ?>" id= "reset" type="button" class="btn btn-light ml-2">Reset</a>
                     </div> 
                 </div>

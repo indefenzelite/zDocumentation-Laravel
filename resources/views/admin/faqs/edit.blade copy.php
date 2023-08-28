@@ -26,9 +26,7 @@
                 </div>
             </div>
         </div>
-        <form action="{{ route('admin.faqs.update', $faq->id) }}" method="post"
-            enctype="multipart/form-data"class=" row ajaxForm ">
-            @csrf
+        <div class="row">
             <div class="col-md-8 mx-auto">
                 <!-- start message area-->
                 @include('admin.include.message')
@@ -39,7 +37,9 @@
                         <button type="submit" class="btn btn-primary">Save & Update</button>
                     </div>
                     <div class="card-body">
-                       
+                        <form action="{{ route('admin.faqs.update', $faq->id) }}" method="post"
+                            enctype="multipart/form-data"class="ajaxForm">
+                            @csrf
                             <input type="hidden" name="request_with" value="update">
                             <div class="row">
                                 <div class="col-md-6">
@@ -114,11 +114,11 @@
                                     </div>
                                 </div>
                             </div>
-                     
+                        </form>
                     </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
     <!-- push external js -->
     @push('script')

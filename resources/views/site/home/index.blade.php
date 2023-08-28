@@ -26,6 +26,7 @@
     data-uk-scrollspy="cls: uk-animation-slide-bottom-medium; repeat: true">
     <div class="uk-container uk-container-small mt-3">
         <h2 class="uk-h1 uk-text-center"><span class="text-success">Gbooks</span> Documentation</h2>
+        
         <div class="hero-search">
             <div class="uk-position-relative">
                 <form action="{{route('search')}}" class="uk-search uk-search-default uk-width-1-1" name="search-hero" id="search-hero-form">
@@ -42,6 +43,7 @@
                 </form>
             </div>
         </div>
+      
     </div>
 </div>
 <!--end section-->

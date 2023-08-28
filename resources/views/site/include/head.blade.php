@@ -35,9 +35,9 @@
      <link href="https://fonts.googleapis.com/css?family=Heebo:300,400" rel="stylesheet">
      <link rel="stylesheet" href="{{asset('admin/plugins/bootstrap/dist/css/bootstrap.min.css')}}">
      <link rel="stylesheet" href="{{ asset('site/assets/css/main.css') }}">
-     <script src="{{asset('user/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-     <link rel="stylesheet" href="{{ asset('admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.css')}}">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" referrerpolicy="no-referrer" />
+     {{-- <script src="{{asset('user/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> --}}
+     {{-- <link rel="stylesheet" href="{{ asset('admin/plugins/jquery-toast-plugin/dist/jquery.toast.min.css')}}"> --}}
+     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" referrerpolicy="no-referrer" /> --}}
 
     
     {{-- Dynamic CSS Before Head --}}

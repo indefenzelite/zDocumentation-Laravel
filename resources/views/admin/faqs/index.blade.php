@@ -35,10 +35,10 @@
                     <form action="{{ route('admin.faqs.store') }}" method="post" class="ajaxForm" enctype="multipart/form-data">
                         @csrf
                         <div class="card">
-                            <div class="card-header justify-content-between">
+                            <div class="card-header  justify-content-between">
                                 <h5>Add {{$label}}</h5>
-                                <div>
-                                    <a href="javascript:void(0);" id="showFaqs" class="btn btn-light ml-2">Show List</a>
+                                <div class="d-flex" >
+                                    <a href="javascript:void(0);" id="showFaqs" class="btn btn-light ml-2 mr-2">Show List</a>
                                     <button type="submit" class="btn btn-primary mr-2">Create</button>
                                 </div>
                             </div>

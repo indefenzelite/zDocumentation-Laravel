@@ -64,21 +64,21 @@
                             {{-- > {{@$faq->subSubCategory->name}} --}}
                         </td>
                         <td>
-                            @if(isset($faq->vote) && $faq->vote->status != null)
-                              {{@getVoteCountByStatus($faq->id,$faq->vote->status) ?? '--'}} 
+                            @if(isset($faq->vote)) 
+                              {{@getVoteCountByStatus($faq->id,App\Models\Vote::STATUS_USEFUL) ?? '--'}} 
                             @else
                               0
                             @endif      
                         </td>
                         <td>
-                            @if(isset($faq->vote) && $faq->vote->status != null)
+                            @if(isset($faq->vote))
                               {{@getVoteCountByStatus($faq->id,App\Models\Vote::STATUS_NEUTRAL) ?? '--'}} 
                             @else
                               0
                             @endif      
                         </td>
                         <td>
-                            @if(isset($faq->vote) && $faq->vote->status != null)
+                            @if(isset($faq->vote))
                               {{@getVoteCountByStatus($faq->id,App\Models\Vote::STATUS_UN_USEFUL) ?? '--'}} 
                             @else
                               0
