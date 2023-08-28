@@ -11,7 +11,10 @@
                 entries
             </label>
         </div>
-        <input type="text" name="search" class="form-control" placeholder="Search" id="search" value="{{ request()->get('search') }}" style="width:unset;">
+        <div >
+            <input type="text" name="search" class="form-control" placeholder="Search" id="search" value="{{ request()->get('search') }}" style="width:unset;">
+
+        </div>
     </div>
     <div class="table-responsive">
         <table id="faqTable" class="table">
