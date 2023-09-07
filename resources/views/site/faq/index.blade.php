@@ -4,7 +4,7 @@
 @endphp
 @extends('layouts.app')
 @section('meta_data')
-    @php
+@php
 	$meta_title = $faq->title ;
     $meta_description = \Str::limit(strip_tags($faq->description),256, '...')  ?? '';
     $meta_keywords = getSeoData('faq')->keyword ?? '';
@@ -13,7 +13,7 @@
     $meta_author_name = '' ?? 'Defenzelite';
     $meta_author_email = '' ?? 'support@defenzelite.com';
     $meta_reply_to = '' ?? getSetting('app_email');
-    $meta_img = ' ';	
+    $meta_img = ' ';	    
 	@endphp
 @endsection
 
@@ -34,7 +34,10 @@
       
         width: 30px;
     }
-  
+    iframe {
+        margin: 0 auto;
+        width: 100%;
+    }
 </style>
 
 @section('content')
@@ -83,6 +86,7 @@
 </div>
 @endsection
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 @push('script')
   <script>
     var url = "{{url('/')}}";
@@ -118,8 +122,29 @@
         }, 5);
 
     });
+  
+        $(document).ready(function() {
+            // Get all <oembed> elements on the page
+            var oembedElements = document.querySelectorAll('oembed');
 
-            
+            oembedElements.forEach(function (element) {
+                var url = element.getAttribute('url');
+
+                // Extract the YouTube video ID from the URL
+                var videoID = url.match(/v=([a-zA-Z0-9_-]+)/);
+
+                if (videoID) {
+                    // Create an iframe element with the YouTube embed code
+                    var iframe = document.createElement('iframe');
+                    iframe.src = 'https://www.youtube.com/embed/' + videoID[1];
+                    iframe.height = '400'; // Set the desired height
+                    iframe.allowFullscreen = true;
+
+                    // Replace the <oembed> element with the embedded iframe
+                    element.parentNode.replaceChild(iframe, element);
+                }
+            });
+        });
      
   </script>
 @endpush
